@@ -1,6 +1,7 @@
 ---
 layout: post
 title: IFTTT Integration Test f1edfb94-570f-48c3-98a7-8baf826205c4
+date:   2018-01-06 19:07:00 -0500
 categories: ifttt integration
 ---
 
