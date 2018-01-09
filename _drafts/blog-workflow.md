@@ -60,3 +60,5 @@ graph blog_tools {
 ```
 
 Incidentally, this is a classic case of "too many stories in one chart." I've got a draft in the works for talking about dealing with that.
+
+Let's reorganize this a little bit with some flow.
