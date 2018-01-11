@@ -1,0 +1,6 @@
+digraph node_edge_label {
+    A -> B
+    B -> {C D E}
+
+    B [label="A descriptive label" shape=none]
+}

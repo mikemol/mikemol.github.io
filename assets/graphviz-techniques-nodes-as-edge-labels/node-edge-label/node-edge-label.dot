@@ -1,0 +1,3 @@
+digraph node_edge_label {
+    A -> B [label="A descriptive label"]
+}
