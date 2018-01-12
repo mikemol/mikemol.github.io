@@ -1,0 +1,80 @@
+digraph blog_workflow {
+	graph [splines=no];
+	node [label="\N"];
+	content_vscode_label	 [label="Authored in",
+		shape=none];
+	vscode	 [label="Visual Studio Code"];
+	content_vscode_label -> vscode;
+	Content -> content_vscode_label;
+	vscode_git_label	 [label="Primary\nInterface\nFor",
+		shape=none];
+	vscode -> vscode_git_label;
+	vscode_preview_label	 [label=Previews,
+		shape=none];
+	vscode -> vscode_preview_label;
+	git_write_label	 [label="For writing to",
+		shape=none];
+	vscode -> git_write_label;
+	git_local	 [label="Local git repo"];
+	vscode_git_label -> git_local;
+	gv_preview	 [label=Dot];
+	vscode_preview_label -> gv_preview;
+	md_preview	 [label=Markdown];
+	vscode_preview_label -> md_preview;
+	git_write_label -> git_local;
+	git_local_source_label	 [label="Read from for",
+		shape=none];
+	git_local -> git_local_source_label;
+	git_local_github_label	 [label="Pushes to",
+		shape=none];
+	git_local -> git_local_github_label;
+	jekyll_local	 [label="Jekyll\n(locally-run)"];
+	git_local_source_label -> jekyll_local;
+	gv_render	 [label=GraphViz];
+	git_local_source_label -> gv_render;
+	git_github	 [label="GitHub git repo"];
+	git_local_github_label -> git_github;
+	ga	 [label="Google Analytics"];
+	jekyll_gh	 [label="Jekyll\n(on GitHub Pages)"];
+	jekyll_gh_ga_label	 [label=Integrates,
+		shape=none];
+	jekyll_gh -> jekyll_gh_ga_label;
+	jekyll_gh_RSS_label	 [label=Generates,
+		shape=none];
+	jekyll_gh -> jekyll_gh_RSS_label;
+	jekyll_gh_ga_label -> ga;
+	jekyll_gh_RSS_label -> RSS;
+	gv_render_label	 [label="Renders Dot to",
+		shape=none];
+	gv_render -> gv_render_label	 [constraint=no];
+	gv_render_label -> PNG	 [constraint=no];
+	gv_render_label -> SVG	 [constraint=no];
+	git_github_jekyll_label	 [label=Feeds,
+		shape=none];
+	git_github -> git_github_jekyll_label;
+	git_github_jekyll_label -> jekyll_gh;
+	PNG -> git_write_label;
+	PNG -> gv_render_label	 [style=invis];
+	SVG -> git_write_label;
+	SVG -> gv_render_label	 [style=invis];
+	RSS_IFTT_label	 [label="Monitored by",
+		shape=none];
+	RSS -> RSS_IFTT_label;
+	RSS_IFTT_label -> IFTTT;
+	IFTTT_post_label	 [label="Post to",
+		shape=none];
+	IFTTT -> IFTTT_post_label;
+	IFTTT_buffer_label	 [label="Adds to",
+		shape=none];
+	IFTTT -> IFTTT_buffer_label;
+	IFTTT_post_label -> Twitter;
+	IFTTT_post_label -> Facebook;
+	IFTTT_post_label -> Reddit;
+	IFTTT_post_label -> LinkedIn;
+	IFTTT_buffer_label -> Buffer;
+	Buffer_posts_label	 [label="Posts to",
+		shape=none];
+	Buffer -> Buffer_posts_label;
+	gplus	 [label="Google Plus"];
+	Buffer_posts_label -> gplus;
+}
