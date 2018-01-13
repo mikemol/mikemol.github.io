@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Nodes as Labels"
-categories: jekyll update nodes edges labels layout
+categories: jekyll update nodes edges labels layout graphviz dot
 ---
 
 So, let's revisit [my last post]({{page.previous.url}}), and look at one of the charts I built for it. It uses a technique I've found works around Dot's limited support for handling edge labels well. 
