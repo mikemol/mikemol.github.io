@@ -36,14 +36,18 @@ Second, instead of needing one label for each edge, we can use one label for _al
 
 Now see what the last post's chart would look like if it used edge labels instead of nodes as labels.
 
-![Preview text tomorrow.]({{ site.url }}/assets/graphviz-techniques-node-as-edge-labels/blog-workflow-edgelabel/blog-workflow-edgelabel.svg)
+![Flow diagram of blog workflow. Labels are drawn over by edges in several places, several edge labels crowd other edges, and the "for writing to" edge appears to be missing; it's been drawn on top of the "Primary interface for" edge.]({{ site.url }}/assets/graphviz-techniques-node-as-edge-labels/blog-workflow-edgelabel/blog-workflow-edgelabel.svg)
 
-See how the labels are being drawn over by edges? Granted, I have splines turned off, but it doesn't really help to turn them back on:
+See how the labels are being drawn over by edges? Granted, I have splines turned off, but it doesn't really help to turn them back on, except to get the "For writing to" edge drawn where you can see it again:
 
-![Preview text tomorrow.]({{ site.url }}/assets/graphviz-techniques-node-as-edge-labels/blog-workflow-edgelabel-splines/blog-workflow-edgelabel-splines.svg)
+![Flow diagram of blog workflow. Labels aren't being drawn over by edges, but they are crowding several edges, with some edges taking strange circumlocutive routes. The edges themselves look dented and bent.]({{ site.url }}/assets/graphviz-techniques-node-as-edge-labels/blog-workflow-edgelabel-splines/blog-workflow-edgelabel-splines.svg)
+
+Here, labels aren't being drawn over by edges, but they're very crowded. Notices the edge between Graphviz and SVG; it takes a very long route, and it look very dented as it passes near various other edges and labels; the layout engine had a difficult time finding it a clear path.
 
 But if we use nodes in place of edge labels, it cleans up nicely:
 
-![Preview text tomorrow.]({{ site.url }}/assets/graphviz-techniques-node-as-edge-labels/blog-workflow/blog-workflow.svg)
+![Flow diagram of content creation. The diagram is much taller than previous diagrams, but it's also much narrower. No edge overlaps any label, and there's a clear margin of space between label text and edges, aiding readability.]({{ site.url }}/assets/graphviz-techniques-node-as-edge-labels/blog-workflow/blog-workflow.svg)
+
+The diagram is much taller than previous diagrams, but it's also much narrower. No edge overlaps any label, and there's a clear margin of space between label text and edges, aiding readability. We were also able to use nodes-as-labels to create concentration points; see where `Visual Studio Code`, `SVG` and `PNG` all point to `For writing to` before moving on to `Local git repo`? By being able to reuse the same label, we were able to take a great deal of strain off of the layout engine and let it give us a much cleaner result.
 
 So, there. A fairly simple technique. May you find it useful!
