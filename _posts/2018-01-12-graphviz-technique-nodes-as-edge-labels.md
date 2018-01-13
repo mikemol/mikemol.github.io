@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Nodes as Labels"
-date:   2018-01-12 19:36:00 -0500
+date:   2018-01-12 19:47:00 -0500
 categories: jekyll update nodes edges labels layout graphviz dot
 ---
 
