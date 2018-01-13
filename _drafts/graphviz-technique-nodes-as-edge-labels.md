@@ -4,7 +4,7 @@ title:  "Nodes as Labels"
 categories: jekyll update nodes edges labels layout
 ---
 
-So, let's revisit my last post, and look at one of the charts I built for it. It uses a technique I've found works around Dot's limited support for handling edge labels well. 
+So, let's revisit [my last post]({{page.previous.url}}), and look at one of the charts I built for it. It uses a technique I've found works around Dot's limited support for handling edge labels well. 
 
 First, I apologize if I state some obvious things in here; Dot and Graphviz operate on a lot of computer science principles, and that's not my background. So I apologize for boring of you who already know what I'm talking about.
 
@@ -50,4 +50,4 @@ But if we use nodes in place of edge labels, it cleans up nicely:
 
 The diagram is much taller than previous diagrams, but it's also much narrower. No edge overlaps any label, and there's a clear margin of space between label text and edges, aiding readability. We were also able to use nodes-as-labels to create concentration points; see where `Visual Studio Code`, `SVG` and `PNG` all point to `For writing to` before moving on to `Local git repo`? By being able to reuse the same label, we were able to take a great deal of strain off of the layout engine and let it give us a much cleaner result.
 
-So, there. A fairly simple technique. May you find it useful!
+So, there. A fairly simple technique, but it carries a _big_ impact. May you find it useful!
