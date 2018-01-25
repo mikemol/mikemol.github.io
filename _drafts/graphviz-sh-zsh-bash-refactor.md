@@ -33,7 +33,8 @@ So, again, we're covering each of `sh`, `zsh` and `bash`, with every combination
 
 The first thing to notice is the use of swimlanes. Instead of using a common node to identify a file, we use a swimlane to identify a combination of session parameters. While this makes the chart decidedly less compact, reduces a lot of pressure on the layout engine, letting us do a lot more tweaking, and giving us the option of packing in more information without the output looking like a tangled mess of spaghetti flow.
 
-#### Origins / Rationale
+#### Swimlanes Origins / Rationale
+
 The use of swimlanes came out of my earlier attempt to reformulate the chart as a truth table (before I discovered that the special conditional relationships between ~/.profile, ~/.bash_login and ~/.bash_profile), which followed my attempt to replace the nodes in the original chart with clusters where each workflow would stop off at a workflow-dedicated node in a cluster corresponding to the file being evaluated. If that sounds confusing, that might be related to why graphviz gave me a bunch of spaghetti for my efforts.
 
 ### Granular Same-Rank Association
@@ -57,8 +58,16 @@ What's interesting about this approach is that while the above nodes will be in 
 
 If we forced the column/rank to be _exclusive_ to our `/etc/zshenv` nodes (or the "No Path" node), we'd need an additional column/rank to fit all of the nodes, and the chart would be physically larger as a result, to no real gain.
 
-#### Origins / Rationale
+#### `rank=same` Origins / Rationale
 
 I originally tried to use common nodes, and then clusters, to group common points in the different workflows, but I invariably wound up with spaghetti flows. When you use clusters, Graphviz will try to pull the nodes in a cluster into the smallest possible space, distorting the graph outside of the cluster. However, the anonymous subgraph using `rank=same` doesn't have that distorting effect; it only forces nodes into a given rank.
 
 The more I used constraining tools like clusters and edges with `[constraint=true]` (which is the default), the harder it became to avoid spaghetti. I felt like the Emporer; the tighter I gripped, the more slipped through my grasp. The more I relaxed, the easier it became.
+
+### Eye-Guiding, Non-Constraining Lines
+
+If you look at the `/etc/zshenv` nodes, you can see a small dotted line connecting them. The dotted line is invariably vertical; they're all within the `rank=same` groupings noted above, and are there to draw your eye along the column and help you identify role-related nodes. They also help drive the association that a column is a grouping, even without a column header.
+
+#### Eye-guide Origins / Rationale
+
+Without the clear bounding boxes offered by clusters, I wanted a way to get visible groupings. Drawing non-constraining lines provided that. A dotted line is less distracting from the swimlanes than a solid line would be.
