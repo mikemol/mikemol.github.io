@@ -4,6 +4,7 @@ title:  "Sh-Zsh-Bash Chart Refactor"
 date:   2018-01-05 21:32:00 -0500
 categories: graphviz refactor sh zsh bash
 ---
+# Sh-Zsh-Bash Chart Refactor
 
 So, on the Grand Rapids Slack team, T.J. Zimmerman shared an interesting chart (originally by [Peter Ward](https://github.com/flowblok), from his blog post [here](https://blog.flowblok.id.au/2013-02/shell-startup-scripts.html)) which showed the behaviors of `sh`, `zsh` and `bash` as they built (and tore down) their environments in each of (non-)remote, (non-)login and (non-)interactice sessions. It was interesting in that it conveyed a huge amount of very useful information, but I was, well, offended that it didn't seem to do so well.
 
