@@ -72,3 +72,9 @@ If you look at the `/etc/zshenv` nodes, you can see a small dotted line connecti
 #### Eye-guide Origins / Rationale
 
 Without the clear bounding boxes offered by clusters, I wanted a way to get visible groupings. Drawing non-constraining lines provided that. A dotted line is less distracting from the swimlanes than a solid line would be.
+
+### Colors
+
+### HTML-like labels for Choices
+
+### Same-rank, Constraining Edges
