@@ -32,7 +32,11 @@ So, again, we're covering each of `sh`, `zsh` and `bash`, with every combination
 
 ### Swimlanes
 
-The first thing to notice is the use of swimlanes. Instead of using a common node to identify a file, we use a swimlane to identify a combination of session parameters. While this makes the chart decidedly less compact, reduces a lot of pressure on the layout engine, letting us do a lot more tweaking, and giving us the option of packing in more information without the output looking like a tangled mess of spaghetti flow.
+The first thing to notice is the use of swimlanes.
+
+![There is a single horizontal line drawn, with labels representing activities along it. The line is blueish-green and begins with Zsh Login Interactive, proceeds to /etc/zshenv, then to ~/.zshenv, ~/.zprofile, ~/.zshrc, ~/.zlogin, the Running state, and finally to ~/.zlogout.]({{ site.url }}/assets/sh-zsh-bash-refactor/swimlane/swimlane.svg)
+
+Instead of using a particular-colored line bouncing from file node to file node shared with other colored lines, we use a single swimlane to identify a single combination of session parameters. While this makes the chart decidedly less compact, it reduces a great deal of pressure on the layout engine, letting us do much more tweaking, and giving us the option of packing in more information without the output looking like a tangled mess of spaghetti.
 
 #### Swimlanes Origins / Rationale
 
