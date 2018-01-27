@@ -82,3 +82,7 @@ Without the clear bounding boxes offered by clusters, I wanted a way to get visi
 ### HTML-like labels for Choices
 
 ### Same-rank, Constraining Edges
+
+### Rank-anchoring
+
+(Note the samerank needed to draw $ENV to the end of the chart.)
