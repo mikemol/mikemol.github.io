@@ -70,7 +70,7 @@ digraph {
         bash_rnn_home_bashrc
 
         zsh_ni_home_zshrc ->
-        zsh_li_home_zshrc ->
+        zsh_li_home_zshrc
         bash_nni_home_bashrc ->
         bash_rnn_home_bashrc
     }
