@@ -40,7 +40,7 @@ Instead of using a particular-colored line bouncing from file node to file node 
 
 #### Swimlanes Origins / Rationale
 
-The use of swimlanes came out of my earlier attempt to reformulate the chart as a truth table (before I discovered that the special conditional relationships between ~/.profile, ~/.bash_login and ~/.bash_profile), which followed my attempt to replace the nodes in the original chart with clusters where each workflow would stop off at a workflow-dedicated node in a cluster corresponding to the file being evaluated. If that sounds confusing, that might be related to why graphviz gave me a bunch of spaghetti for my efforts.
+The use of swimlanes came out of my earlier attempt to reformulate the chart as a truth table. This was before I discovered the special conditional relationships between ~/.profile, ~/.bash_login and ~/.bash_profile. Earlier still, I'd attempted to replace the nodes in the original chart with clusters where each workflow would stop off at a workflow-dedicated node in a cluster corresponding to the file being evaluated. If you're having a difficult time picturing that, don't worry; so did the layout engine&emdash;it gave me a bunch of spaghetti, in large part because it tries to route edges around clusters, rather than through them.
 
 ### Granular Same-Rank Association
 
