@@ -3,7 +3,6 @@ digraph {
     edge [style=dotted constraint=false dir=none]
     rankdir=LR
     {
-        rank=same
         sh_nn [label="Sh\nNon-Login\nNon-Interactive"]
         sh_ni [label="Sh\nNon-Login\nInteractive"]
         sh_ln [label="Sh\nLogin\nNon-Interactive"]
@@ -19,13 +18,11 @@ digraph {
         sh_li_running
     }
     {
-        rank=same
         node [label="$ENV"]
         sh_ni_env ->
         sh_li_env
     }
     {
-        rank=same
         node [label="~/.profile"]
         sh_ln_home_profile ->
         sh_li_home_profile
