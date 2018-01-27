@@ -39,21 +39,17 @@ digraph {
         zsh_li_home_zlogin
 
         node  [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.bash_login</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
-        bash_nln_home_bash_login_case
-        bash_nli_home_bash_login_case
-        bash_rln_home_bash_login_case
+        bash_nln_home_bash_login_case ->
+        bash_nli_home_bash_login_case ->
+        bash_rln_home_bash_login_case ->
         bash_rli_home_bash_login_case
-
-        node [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.profile</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
-        bash_nln_home_profile_case
-        bash_nli_home_profile_case
-        bash_rln_home_profile_case
-        bash_rli_home_profile_case
-
+    }
+    {
+        rank=same
         node [label="~/.bash_profile"]
-        bash_nln_home_bash_profile
-        bash_nli_home_bash_profile
-        bash_rln_home_bash_profile
+        bash_nln_home_bash_profile ->
+        bash_nli_home_bash_profile ->
+        bash_rln_home_bash_profile ->
         bash_rli_home_bash_profile
     }
 
@@ -132,6 +128,15 @@ digraph {
         node [label="~/.zprofile"]
         zsh_ln_home_zprofile ->
         zsh_li_home_zprofile
+
+        node [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.profile</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+        bash_nln_home_profile_case ->
+        bash_nli_home_profile_case ->
+        bash_rln_home_profile_case ->
+        bash_rli_home_profile_case
+
+        sh_li_home_profile -> bash_nln_home_profile_case
+
     }
 
     {
@@ -225,5 +230,4 @@ digraph {
     bash_rli_home_profile_case:found -> bash_rli_running_to_logout 
     bash_rli_home_profile_case:not_found -> bash_rli_home_bash_login_case:in
     bash_rli_running_to_logout -> bash_rli_logout
-
 }
