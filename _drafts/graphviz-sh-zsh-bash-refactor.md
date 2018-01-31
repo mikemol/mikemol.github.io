@@ -49,19 +49,38 @@ The columnar behavior is in part because Graphviz thinks of this as a directed g
 ```dot
     {
         rank=same
-        node [label="/etc/zshenv"]
-        zsh_nn_etc_zshenv ->
-        zsh_ni_etc_zshenv ->
-        zsh_ln_etc_zshenv ->
-        zsh_li_etc_zshenv
+        sh_nn [label="Sh\nNon-Login\nNon-Interactive"]
+        sh_ni [label="Sh\nNon-Login\nInteractive"]
+        sh_ln [label="Sh\nLogin\nNon-Interactive"]
+        sh_li [label="Sh\nLogin\nInteractive"]
     }
 ```
 
-The above code results in all of the `/etc/zshenv` nodes being in the same rank (and thus the same column, in this graph), and draws the eye-guiding edges connecting the nodes.
+The above code results in all of the session-describing nodes in the same rank (and thus the same column, in this graph). In the following image, the above code is what builds the left-most column.
 
-What's interesting about this approach is that while the above nodes will be in the same rank, we're not forcing them to be the _only_ things in that rank. If you find the `/etc/zshenv` nodes in the graph and look around, you'll find a node labeled "No Path" in the same rank! But since, the "No Path" node isn't part of the same series of directed, constraining edges that form the swimlanes, there's no reason for the layout engine to not put the node in the lowest rank following the session label node.
+![There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane.]({{ site.url }}/assets/sh-zsh-bash-refactor/samerank/samerank.svg)
 
-If we forced the column/rank to be _exclusive_ to our `/etc/zshenv` nodes (or the "No Path" node), we'd need an additional column/rank to fit all of the nodes, and the chart would be physically larger as a result, to no real gain.
+If I remove the samerank behavior from all but the Running column, this is the result:
+
+
+![There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The last point in each swimlane, Running, is lined up vertically. The first point in each swimlane contains the name of each swimlane, but is not lined up vertically.]({{ site.url }}/assets/sh-zsh-bash-refactor/nonsamerank/nonsamerank.svg)
+
+Note that all of the empty stretches in the swimlanes have collapsed, with everything moving as close to the Running column as its swimlane allows. That's obviously much less clear than having the swimlane labels lined up, with empty space where a swimlane doesn't have a function in common with any other swimlane.
+
+The other thing interesting about this approach is that while the above nodes will be in the same rank, we're not forcing them to be the _only_ things in that rank.
+
+Let's return to the samerank behavior:
+
+
+![There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane.]({{ site.url }}/assets/sh-zsh-bash-refactor/samerank/samerank.svg)
+
+Now let's add a a few new nodes and edges, and another samerank grouping. This is largely the same as the above image, but I've de-emphasized (by making them dashed lines) the swimlane edges, emphasized the samerank groupings (by adding visible lines where there weren't any, and making all lines thick and solid), and made the nodes part of each grouping a different shape and color.
+
+![In the top half of the image, there are four rows. The first row has a single node labeled A. The second row has a node labeled A, with a dashed arrow leading to a black circle with the label B. The third row has a black circle with the label B directly beneath the second row's black circle with the label B, and has a dashed line leading to a node labeled C. The fourth row has a node labeled A with a dashed line leading to a black circle labeled B (directly beneath the other two black circles), which has a dashed line leading to a node labeled C, which as a dashed line leading to a node labeled D. There is a solid black line joining the three black circles. In the next four rows, there are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane. The first column's nodes are rectangles with a yellow background, and a thick yellow line joins them. The second column only has nodes in the final two swimlanes. The second column's nodes are reddish purple parallelograms labeled "~/.profile", and have a thick reddish-purple line joining them. The third column has nodes on the second and forth swimlanes. The nodes for the third column are vermillion diamonds labeled "$ENV". The fourth column's nodes are blue triangles, and there is a thick blue line joining them.]({{ site.url }}/assets/sh-zsh-bash-refactor/samerankplus/samerankplus.svg)
+
+The set of black nodes and edges are held in place with two constraints; the `A -> B -> C -> D` row has as many ranks as the entire graph, so it extends end to end. The three black circles labeled "B" are held together via a `rank=same` directive, which is why the `B -> C` line is in the middle of the graph, occupying neither the first or fourth ranks.
+
+Now, the set of nodes labeled "B" are interesting, because they occupy the same rank as the set of nodes labeled "~/.profile". Just because you set two different sets of nodes as `rank=same` doesn't mean each _set_ of nodes they'll occupy the same rank, but it doesn't mean they'll occupy different ranks, either.
 
 #### `rank=same` Origins / Rationale
 
