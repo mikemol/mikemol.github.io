@@ -82,6 +82,8 @@ The set of black nodes and edges are held in place with two constraints; the `A 
 
 Now, the set of nodes labeled "B" are interesting, because they occupy the same rank as the set of nodes labeled "~/.profile". Just because you set two different sets of nodes as `rank=same` doesn't mean each _set_ of nodes they'll occupy the same rank, but it doesn't mean they'll occupy different ranks, either.
 
+This helps us avoid the use of _column_ headers, since we're able to reuse the same column for multiple groups of data, so long as those groups aren't in the same swimlane.
+
 #### `rank=same` Origins / Rationale
 
 I originally tried to use common nodes, and then clusters, to group common points in the different workflows, but I invariably wound up with spaghetti flows. When you use clusters, Graphviz will try to pull the nodes in a cluster into the smallest possible space, distorting the graph outside of the cluster. However, the anonymous subgraph using `rank=same` doesn't have that distorting effect; it only forces nodes into a given rank.
@@ -90,7 +92,12 @@ The more I used constraining tools like clusters and edges with `[constraint=tru
 
 ### Eye-Guiding, Non-Constraining Lines
 
-If you look at the `/etc/zshenv` nodes, you can see a small dotted line connecting them. The dotted line is invariably vertical; they're all within the `rank=same` groupings noted above, and are there to draw your eye along the column and help you identify role-related nodes. They also help drive the association that a column is a grouping, even without a column header.
+Look for the small vertical dotted lines in this subset of the larger graph:
+
+
+![There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane.]({{ site.url }}/assets/sh-zsh-bash-refactor/samerank/samerank.svg)
+
+Each of these dotted lines are within a `rank=same` grouping, and they help draw your eye along that rank in order to identify the grouped elements. Since we group elemements of the same or similar roles, that helps you identify those roles as groupings without being too distracting from the swimlanes.
 
 #### Eye-guide Origins / Rationale
 
