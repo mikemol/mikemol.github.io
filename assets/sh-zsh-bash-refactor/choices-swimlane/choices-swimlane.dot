@@ -1,0 +1,22 @@
+digraph {
+    node [label="\N" shape=none]
+    edge [style=dotted constraint=false dir=none]
+    rankdir=LR
+
+    bash_nli [label="Bash\nNon-Remote\nLogin\nInteractive"]
+    bash_nli_etc_profile [label="/etc/profile"]
+    bash_nli_home_bash_login_case  [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.bash_login</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+    bash_nli_home_bash_profile [label="~/.bash_profile"]
+    bash_nli_running_to_logout [label="Running..."]
+    bash_nli_logout [label="~/.bash_logout"]
+    bash_nli_home_profile_case [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.profile</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+    
+    edge [color="#009e73" penwidth=5 constraint=true style=solid dir=forward]
+
+    bash_nli -> bash_nli_etc_profile -> bash_nli_home_profile_case:in
+    bash_nli_home_bash_login_case:found -> bash_nli_running_to_logout
+    bash_nli_home_bash_login_case:not_found -> bash_nli_home_bash_profile -> bash_nli_running_to_logout 
+    bash_nli_home_profile_case:found -> bash_nli_running_to_logout
+    bash_nli_home_profile_case:not_found -> bash_nli_home_bash_login_case:in
+    bash_nli_running_to_logout -> bash_nli_logout
+}

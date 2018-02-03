@@ -124,6 +124,45 @@ Colors should be used for accenting and supplementing information, not as a prim
 
 ### HTML-like labels for Choices
 
+The original chart had choices presented in it, but it wasn't clear that that's what they were unless you read the supporting text. Here, we use HTML-like labels in order to use tables to get us nodes with multiple inputs and outputs. This lets us label a path without using edge labels.
+
+![A single swimlane is shown, for Bash non-remote, login, interactive. The flow proceeds from the label to /etc/profile. From there, to ~/.profile. If ~/.profile is found, flow proceeds to the Running state and then to ~/.bash_logout. If ~/.profile is not found, flow proceeds to ~/.bash_login. If ~/.bash_login is found, flow proceeds to the Running state and then to ~/.bash_logout. If ~/.bash_login is not found, flow proceeds to ~/.bash_profile, then to the Running state and finaly to ~/.bash_logout. ~/.profile and ~/.bash_login are represented by boxes with three cells. Flow passes into the box at the cell labeled after the file in question. Flow leaves the box through cells labeled "Found" and "Not found", with lines drawn to wherever flow moves next.]({{ site.url }}/assets/sh-zsh-bash-refactor/choices-swimlane/choices-swimlane.svg)
+
+Notice the boxes for `~/.profile` and `~/.bash_login`. See how flow passes into the box at the cell labeled after the file in question, and flow leaves the box through cells labeled "Found" and "Not found", with lines drawn to wherever flow moves next. These are HTML-like labels, specifically taking advantage of tables and _ports_. The Dot language doesn't actually implement HTML, nor does it fully implement HTML tables. It does, however, _extend_ tables with ports; you can add a `port="some_string"` attribute to a `td` element in an HTML-like label, and then address that specific _port_ when drawing edges, using syntax like `node1:my_port -> node2:my_other_port`, or even `node1:port1 -> node1:port2`
+
+Here's the source code for the above swimlane. See if you can identify where the ports are created, and where they're used in the edges.
+
+```dot
+digraph {
+    node [label="\N" shape=none]
+    edge [style=dotted constraint=false dir=none]
+    rankdir=LR
+
+    bash_nli [label="Bash\nNon-Remote\nLogin\nInteractive"]
+    bash_nli_etc_profile [label="/etc/profile"]
+    bash_nli_home_bash_login_case  [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.bash_login</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+    bash_nli_home_bash_profile [label="~/.bash_profile"]
+    bash_nli_running_to_logout [label="Running..."]
+    bash_nli_logout [label="~/.bash_logout"]
+    bash_nli_home_profile_case [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.profile</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+    
+    edge [color="#009e73" penwidth=5 constraint=true style=solid dir=forward]
+
+    bash_nli -> bash_nli_etc_profile -> bash_nli_home_profile_case:in
+    bash_nli_home_bash_login_case:found -> bash_nli_running_to_logout
+    bash_nli_home_bash_login_case:not_found -> bash_nli_home_bash_profile -> bash_nli_running_to_logout 
+    bash_nli_home_profile_case:found -> bash_nli_running_to_logout
+    bash_nli_home_profile_case:not_found -> bash_nli_home_bash_login_case:in
+    bash_nli_running_to_logout -> bash_nli_logout
+}
+```
+
+### HTML-like labels for Choices Origins / Rationale
+
+I'd actually completed the chart using a very different style before I realized I was missing the choices, and rewrote the chart to identify the decision points. To label the decision points, I tried using cluster, nodes as labels, nodes-as-labels with some deliberate coalescing of shortcut paths...I even tried using edge labels. I couldn't make the chart come out clean. Finally, I tried using HTML labels with ports, and it gave me a result compact enough to make a chart that _worked_ and didn't have edge spaghetti everywhere.
+
+The big advantage to using HTML-like labels and tables, in this case, is that the layout engine treats the entire label as a single node, for the purpose of placing nodes. That makes ranking much easier to manage, as a single piece of information doesn't have to spread across multiple ranks; I had tried using both `rank=same` and clusters to contain _that_ problem, and I simply wound up with more edge spaghetti as the layout engine either chose strange circumlocutious paths for edges, or tried running edges around clusters in ways that made edges difficult to distinguish from each other. Ultimately, being able to pack all of that information cleanly into the boundary of a single node let me build a much cleaner graph.
+
 ### Same-rank, Constraining Edges
 
 ### Rank-anchoring
