@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Sh-Zsh-Bash Chart Refactor"
-date:   2018-01-05 21:32:00 -0500
+date:   2018-02-04 15:40:00 -0500
 categories: graphviz refactor sh zsh bash
 ---
 # Sh-Zsh-Bash Chart Refactor
