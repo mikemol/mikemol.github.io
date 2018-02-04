@@ -225,7 +225,3 @@ _There is one other_ constraining samerank edge in the graph, though:
 ```
 
 If you look at the swimlane for Bash/Remote/Non-Login/Interactive, you'll notice is't quite short. In fact, it goes straight to "No path", and doesn't reach the Running state. Since the Running state is where we're applying all of our samerank edge constraints, this particular swimlane doesn't get picked up by it. So we anchor it to its neighbors (Bash/Remote/Non-Login/Non-Interactive and Bash/Remote/Login/Non-Interactive) in order to control its vertical placement. If we didn't, it would float to the top of the chart, and would be nowhere near the rest of the Bash swimlanes!
-
-### Rank-anchoring
-
-(Note the samerank needed to draw $ENV to the end of the chart.)
