@@ -334,21 +334,21 @@
 <g id="edge6" class="edge"><title>zsh_ln_home_zlogin&#45;&gt;zsh_li_home_zlogin</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M745.5,-827.791C745.5,-816.203 745.5,-804.615 745.5,-793.027"/>
 </g>
-<!-- zsh_ln_running_to_logout -->
-<g id="node44" class="node"><title>zsh_ln_running_to_logout</title>
+<!-- zsh_ln_running -->
+<g id="node44" class="node"><title>zsh_ln_running</title>
 <text text-anchor="middle" x="1163" y="-842.3" font-family="Times,serif" font-size="14.00">Running...</text>
 </g>
-<!-- zsh_ln_home_zlogin&#45;&gt;zsh_ln_running_to_logout -->
-<g id="edge68" class="edge"><title>zsh_ln_home_zlogin&#45;&gt;zsh_ln_running_to_logout</title>
+<!-- zsh_ln_home_zlogin&#45;&gt;zsh_ln_running -->
+<g id="edge68" class="edge"><title>zsh_ln_home_zlogin&#45;&gt;zsh_ln_running</title>
 <path fill="none" stroke="#35b4e9" stroke-width="5" d="M778.071,-846C850.79,-846 1030.38,-846 1115.64,-846"/>
 <polygon fill="#35b4e9" stroke="#35b4e9" stroke-width="5" points="1115.8,-850.375 1125.8,-846 1115.8,-841.625 1115.8,-850.375"/>
 </g>
-<!-- zsh_li_running_to_logout -->
-<g id="node45" class="node"><title>zsh_li_running_to_logout</title>
+<!-- zsh_li_running -->
+<g id="node45" class="node"><title>zsh_li_running</title>
 <text text-anchor="middle" x="1163" y="-771.3" font-family="Times,serif" font-size="14.00">Running...</text>
 </g>
-<!-- zsh_li_home_zlogin&#45;&gt;zsh_li_running_to_logout -->
-<g id="edge75" class="edge"><title>zsh_li_home_zlogin&#45;&gt;zsh_li_running_to_logout</title>
+<!-- zsh_li_home_zlogin&#45;&gt;zsh_li_running -->
+<g id="edge75" class="edge"><title>zsh_li_home_zlogin&#45;&gt;zsh_li_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M778.071,-775C850.79,-775 1030.38,-775 1115.64,-775"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1115.8,-779.375 1125.8,-775 1115.8,-770.625 1115.8,-779.375"/>
 </g>
@@ -414,12 +414,12 @@
 <path fill="none" stroke="#009e73" stroke-width="5" d="M818.5,-371C829.042,-371 840.114,-369.704 850.763,-367.771"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="851.875,-372.01 860.813,-365.745 850.145,-363.433 851.875,-372.01"/>
 </g>
-<!-- bash_nli_running_to_logout -->
-<g id="node49" class="node"><title>bash_nli_running_to_logout</title>
+<!-- bash_nli_running -->
+<g id="node49" class="node"><title>bash_nli_running</title>
 <text text-anchor="middle" x="1163" y="-393.3" font-family="Times,serif" font-size="14.00">Running...</text>
 </g>
-<!-- bash_nli_home_bash_login_case&#45;&gt;bash_nli_running_to_logout -->
-<g id="edge93" class="edge"><title>bash_nli_home_bash_login_case:found&#45;&gt;bash_nli_running_to_logout</title>
+<!-- bash_nli_home_bash_login_case&#45;&gt;bash_nli_running -->
+<g id="edge93" class="edge"><title>bash_nli_home_bash_login_case:found&#45;&gt;bash_nli_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M818.5,-393C924.928,-393 1049.89,-394.944 1115.84,-396.121"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1115.82,-400.497 1125.9,-396.303 1115.98,-391.748 1115.82,-400.497"/>
 </g>
@@ -463,12 +463,12 @@
 <path fill="none" stroke="#009e73" stroke-width="5" d="M818.5,-38C829.042,-38 840.114,-36.7038 850.763,-34.7714"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="851.875,-39.0104 860.813,-32.7452 850.145,-30.433 851.875,-39.0104"/>
 </g>
-<!-- bash_rli_running_to_logout -->
-<g id="node52" class="node"><title>bash_rli_running_to_logout</title>
+<!-- bash_rli_running -->
+<g id="node52" class="node"><title>bash_rli_running</title>
 <text text-anchor="middle" x="1163" y="-79.3" font-family="Times,serif" font-size="14.00">Running...</text>
 </g>
-<!-- bash_rli_home_bash_login_case&#45;&gt;bash_rli_running_to_logout -->
-<g id="edge114" class="edge"><title>bash_rli_home_bash_login_case:found&#45;&gt;bash_rli_running_to_logout</title>
+<!-- bash_rli_home_bash_login_case&#45;&gt;bash_rli_running -->
+<g id="edge114" class="edge"><title>bash_rli_home_bash_login_case:found&#45;&gt;bash_rli_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M818.5,-60C925.16,-60 1050.03,-71.1763 1115.9,-77.9472"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1115.55,-82.3097 1125.95,-78.9937 1116.46,-73.6067 1115.55,-82.3097"/>
 </g>
@@ -485,8 +485,8 @@
 <g id="edge11" class="edge"><title>bash_nli_home_bash_profile&#45;&gt;bash_rln_home_bash_profile</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M910.5,-332.957C910.5,-277.384 910.5,-221.811 910.5,-166.238"/>
 </g>
-<!-- bash_nli_home_bash_profile&#45;&gt;bash_nli_running_to_logout -->
-<g id="edge95" class="edge"><title>bash_nli_home_bash_profile&#45;&gt;bash_nli_running_to_logout</title>
+<!-- bash_nli_home_bash_profile&#45;&gt;bash_nli_running -->
+<g id="edge95" class="edge"><title>bash_nli_home_bash_profile&#45;&gt;bash_nli_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M960.022,-359.501C995.94,-365.841 1046.05,-374.789 1090,-383 1098.37,-384.563 1107.27,-386.265 1115.87,-387.926"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1115.11,-392.235 1125.76,-389.846 1116.78,-383.646 1115.11,-392.235"/>
 </g>
@@ -499,8 +499,8 @@
 <path fill="none" stroke="#35b4e9" stroke-width="5" d="M960.093,-165.129C968.623,-168.135 977.559,-171.285 986.265,-174.354"/>
 <polygon fill="#35b4e9" stroke="#35b4e9" stroke-width="5" points="985.076,-178.574 995.962,-177.772 987.985,-170.321 985.076,-178.574"/>
 </g>
-<!-- bash_rli_home_bash_profile&#45;&gt;bash_rli_running_to_logout -->
-<g id="edge116" class="edge"><title>bash_rli_home_bash_profile&#45;&gt;bash_rli_running_to_logout</title>
+<!-- bash_rli_home_bash_profile&#45;&gt;bash_rli_running -->
+<g id="edge116" class="edge"><title>bash_rli_home_bash_profile&#45;&gt;bash_rli_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M960.021,-23.3337C996.375,-28.1338 1047.04,-36.5415 1090,-50 1099.25,-52.8982 1108.87,-56.7032 1117.95,-60.6957"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1116.26,-64.7357 1127.18,-64.894 1119.89,-56.771 1116.26,-64.7357"/>
 </g>
@@ -628,20 +628,20 @@
 <g id="edge21" class="edge"><title>zsh_nn_running&#45;&gt;zsh_ni_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-969.791C1163,-958.203 1163,-946.615 1163,-935.027"/>
 </g>
-<!-- zsh_ni_running&#45;&gt;zsh_ln_running_to_logout -->
-<g id="edge22" class="edge"><title>zsh_ni_running&#45;&gt;zsh_ln_running_to_logout</title>
+<!-- zsh_ni_running&#45;&gt;zsh_ln_running -->
+<g id="edge22" class="edge"><title>zsh_ni_running&#45;&gt;zsh_ln_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-898.791C1163,-887.203 1163,-875.615 1163,-864.027"/>
 </g>
-<!-- zsh_ln_running_to_logout&#45;&gt;zsh_li_running_to_logout -->
-<g id="edge23" class="edge"><title>zsh_ln_running_to_logout&#45;&gt;zsh_li_running_to_logout</title>
+<!-- zsh_ln_running&#45;&gt;zsh_li_running -->
+<g id="edge23" class="edge"><title>zsh_ln_running&#45;&gt;zsh_li_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-827.791C1163,-816.203 1163,-804.615 1163,-793.027"/>
 </g>
 <!-- zsh_ln_home_zlogout -->
 <g id="node58" class="node"><title>zsh_ln_home_zlogout</title>
 <text text-anchor="middle" x="1285" y="-842.3" font-family="Times,serif" font-size="14.00">~/.zlogout</text>
 </g>
-<!-- zsh_ln_running_to_logout&#45;&gt;zsh_ln_home_zlogout -->
-<g id="edge69" class="edge"><title>zsh_ln_running_to_logout&#45;&gt;zsh_ln_home_zlogout</title>
+<!-- zsh_ln_running&#45;&gt;zsh_ln_home_zlogout -->
+<g id="edge69" class="edge"><title>zsh_ln_running&#45;&gt;zsh_ln_home_zlogout</title>
 <path fill="none" stroke="#35b4e9" stroke-width="5" d="M1200,-846C1212.21,-846 1225.99,-846 1238.82,-846"/>
 <polygon fill="#35b4e9" stroke="#35b4e9" stroke-width="5" points="1238.85,-850.375 1248.85,-846 1238.85,-841.625 1238.85,-850.375"/>
 </g>
@@ -649,16 +649,16 @@
 <g id="node46" class="node"><title>bash_nnn_running</title>
 <text text-anchor="middle" x="1163" y="-692.3" font-family="Times,serif" font-size="14.00">Running...</text>
 </g>
-<!-- zsh_li_running_to_logout&#45;&gt;bash_nnn_running -->
-<g id="edge24" class="edge"><title>zsh_li_running_to_logout&#45;&gt;bash_nnn_running</title>
+<!-- zsh_li_running&#45;&gt;bash_nnn_running -->
+<g id="edge24" class="edge"><title>zsh_li_running&#45;&gt;bash_nnn_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-756.952C1163,-742.704 1163,-728.455 1163,-714.207"/>
 </g>
 <!-- zsh_li_home_zlogout -->
 <g id="node59" class="node"><title>zsh_li_home_zlogout</title>
 <text text-anchor="middle" x="1285" y="-771.3" font-family="Times,serif" font-size="14.00">~/.zlogout</text>
 </g>
-<!-- zsh_li_running_to_logout&#45;&gt;zsh_li_home_zlogout -->
-<g id="edge76" class="edge"><title>zsh_li_running_to_logout&#45;&gt;zsh_li_home_zlogout</title>
+<!-- zsh_li_running&#45;&gt;zsh_li_home_zlogout -->
+<g id="edge76" class="edge"><title>zsh_li_running&#45;&gt;zsh_li_home_zlogout</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M1200,-775C1212.21,-775 1225.99,-775 1238.82,-775"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1238.85,-779.375 1248.85,-775 1238.85,-770.625 1238.85,-779.375"/>
 </g>
@@ -666,37 +666,37 @@
 <g id="edge25" class="edge"><title>bash_nnn_running&#45;&gt;bash_nni_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-677.751C1163,-661.588 1163,-645.425 1163,-629.262"/>
 </g>
-<!-- bash_nln_running_to_logout -->
-<g id="node48" class="node"><title>bash_nln_running_to_logout</title>
+<!-- bash_nln_running -->
+<g id="node48" class="node"><title>bash_nln_running</title>
 <text text-anchor="middle" x="1163" y="-523.3" font-family="Times,serif" font-size="14.00">Running...</text>
 </g>
-<!-- bash_nni_running&#45;&gt;bash_nln_running_to_logout -->
-<g id="edge26" class="edge"><title>bash_nni_running&#45;&gt;bash_nln_running_to_logout</title>
+<!-- bash_nni_running&#45;&gt;bash_nln_running -->
+<g id="edge26" class="edge"><title>bash_nni_running&#45;&gt;bash_nln_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-592.966C1163,-576.993 1163,-561.02 1163,-545.047"/>
 </g>
-<!-- bash_nln_running_to_logout&#45;&gt;bash_nli_running_to_logout -->
-<g id="edge27" class="edge"><title>bash_nln_running_to_logout&#45;&gt;bash_nli_running_to_logout</title>
+<!-- bash_nln_running&#45;&gt;bash_nli_running -->
+<g id="edge27" class="edge"><title>bash_nln_running&#45;&gt;bash_nli_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-508.629C1163,-477.429 1163,-446.228 1163,-415.027"/>
 </g>
 <!-- bash_nln_logout -->
 <g id="node60" class="node"><title>bash_nln_logout</title>
 <text text-anchor="middle" x="1285" y="-523.3" font-family="Times,serif" font-size="14.00">~/.bash_logout</text>
 </g>
-<!-- bash_nln_running_to_logout&#45;&gt;bash_nln_logout -->
-<g id="edge90" class="edge"><title>bash_nln_running_to_logout&#45;&gt;bash_nln_logout</title>
+<!-- bash_nln_running&#45;&gt;bash_nln_logout -->
+<g id="edge90" class="edge"><title>bash_nln_running&#45;&gt;bash_nln_logout</title>
 <path fill="none" stroke="#35b4e9" stroke-width="5" d="M1200,-527C1208.04,-527 1216.77,-527 1225.45,-527"/>
 <polygon fill="#35b4e9" stroke="#35b4e9" stroke-width="5" points="1225.59,-531.375 1235.59,-527 1225.59,-522.625 1225.59,-531.375"/>
 </g>
-<!-- bash_nli_running_to_logout&#45;&gt;bash_rnn_running -->
-<g id="edge28" class="edge"><title>bash_nli_running_to_logout&#45;&gt;bash_rnn_running</title>
+<!-- bash_nli_running&#45;&gt;bash_rnn_running -->
+<g id="edge28" class="edge"><title>bash_nli_running&#45;&gt;bash_rnn_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-378.87C1163,-360.356 1163,-341.842 1163,-323.328"/>
 </g>
 <!-- bash_nli_logout -->
 <g id="node61" class="node"><title>bash_nli_logout</title>
 <text text-anchor="middle" x="1285" y="-393.3" font-family="Times,serif" font-size="14.00">~/.bash_logout</text>
 </g>
-<!-- bash_nli_running_to_logout&#45;&gt;bash_nli_logout -->
-<g id="edge98" class="edge"><title>bash_nli_running_to_logout&#45;&gt;bash_nli_logout</title>
+<!-- bash_nli_running&#45;&gt;bash_nli_logout -->
+<g id="edge98" class="edge"><title>bash_nli_running&#45;&gt;bash_nli_logout</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M1200,-397C1208.04,-397 1216.77,-397 1225.45,-397"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1225.59,-401.375 1235.59,-397 1225.59,-392.625 1225.59,-401.375"/>
 </g>
@@ -708,16 +708,16 @@
 <g id="edge29" class="edge"><title>bash_rnn_running&#45;&gt;bash_rln_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-286.877C1163,-261.988 1163,-237.1 1163,-212.211"/>
 </g>
-<!-- bash_rln_running&#45;&gt;bash_rli_running_to_logout -->
-<g id="edge30" class="edge"><title>bash_rln_running&#45;&gt;bash_rli_running_to_logout</title>
+<!-- bash_rln_running&#45;&gt;bash_rli_running -->
+<g id="edge30" class="edge"><title>bash_rln_running&#45;&gt;bash_rli_running</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1163,-175.877C1163,-150.988 1163,-126.1 1163,-101.211"/>
 </g>
 <!-- bash_rli_logout -->
 <g id="node62" class="node"><title>bash_rli_logout</title>
 <text text-anchor="middle" x="1285" y="-79.3" font-family="Times,serif" font-size="14.00">~/.bash_logout</text>
 </g>
-<!-- bash_rli_running_to_logout&#45;&gt;bash_rli_logout -->
-<g id="edge119" class="edge"><title>bash_rli_running_to_logout&#45;&gt;bash_rli_logout</title>
+<!-- bash_rli_running&#45;&gt;bash_rli_logout -->
+<g id="edge119" class="edge"><title>bash_rli_running&#45;&gt;bash_rli_logout</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M1200,-83C1208.04,-83 1216.77,-83 1225.45,-83"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1225.59,-87.3751 1235.59,-83 1225.59,-78.6251 1225.59,-87.3751"/>
 </g>
@@ -730,8 +730,8 @@
 <g id="edge31" class="edge"><title>bash_nnn_bash_env&#45;&gt;bash_nln_bash_env</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M1043,-677.734C1043,-633.54 1043,-589.347 1043,-545.154"/>
 </g>
-<!-- bash_nln_bash_env&#45;&gt;bash_nln_running_to_logout -->
-<g id="edge84" class="edge"><title>bash_nln_bash_env&#45;&gt;bash_nln_running_to_logout</title>
+<!-- bash_nln_bash_env&#45;&gt;bash_nln_running -->
+<g id="edge84" class="edge"><title>bash_nln_bash_env&#45;&gt;bash_nln_running</title>
 <path fill="none" stroke="#35b4e9" stroke-width="5" d="M1090.3,-527C1098.56,-527 1107.17,-527 1115.44,-527"/>
 <polygon fill="#35b4e9" stroke="#35b4e9" stroke-width="5" points="1115.68,-531.375 1125.68,-527 1115.68,-522.625 1115.68,-531.375"/>
 </g>
@@ -833,8 +833,8 @@
 <path fill="none" stroke="#009e73" stroke-width="5" d="M520,-412C585.983,-412 602.375,-384.97 663.322,-382.224"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="663.599,-386.594 673.5,-382 663.406,-377.846 663.599,-386.594"/>
 </g>
-<!-- bash_nli_home_profile_case&#45;&gt;bash_nli_running_to_logout -->
-<g id="edge96" class="edge"><title>bash_nli_home_profile_case:found&#45;&gt;bash_nli_running_to_logout</title>
+<!-- bash_nli_home_profile_case&#45;&gt;bash_nli_running -->
+<g id="edge96" class="edge"><title>bash_nli_home_profile_case:found&#45;&gt;bash_nli_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M520,-434C619.779,-434 644.721,-435 744.5,-435 744.5,-435 744.5,-435 911.5,-435 983.516,-435 1065.87,-419.458 1115.89,-408.253"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1116.98,-412.493 1125.75,-406.005 1115.03,-403.962 1116.98,-412.493"/>
 </g>
@@ -861,8 +861,8 @@
 <path fill="none" stroke="#009e73" stroke-width="5" d="M520,-66C585.154,-66 603.078,-50.6827 663.435,-49.1271"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="663.556,-53.501 673.5,-49 663.446,-44.7517 663.556,-53.501"/>
 </g>
-<!-- bash_rli_home_profile_case&#45;&gt;bash_rli_running_to_logout -->
-<g id="edge117" class="edge"><title>bash_rli_home_profile_case:found&#45;&gt;bash_rli_running_to_logout</title>
+<!-- bash_rli_home_profile_case&#45;&gt;bash_rli_running -->
+<g id="edge117" class="edge"><title>bash_rli_home_profile_case:found&#45;&gt;bash_rli_running</title>
 <path fill="none" stroke="#009e73" stroke-width="5" d="M520,-88C619.972,-88 644.528,-102 744.5,-102 744.5,-102 744.5,-102 911.5,-102 982.96,-102 1065.56,-94.2171 1115.77,-88.6137"/>
 <polygon fill="#009e73" stroke="#009e73" stroke-width="5" points="1116.53,-92.9301 1125.97,-87.4547 1115.55,-84.236 1116.53,-92.9301"/>
 </g>
