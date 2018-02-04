@@ -165,6 +165,67 @@ The big advantage to using HTML-like labels and tables, in this case, is that th
 
 ### Same-rank, Constraining Edges
 
+Notice how there's a very definite sequence to the ordering of the swimlanes?
+
+| Shell | Remote | Login | Interactive |
+| ---:|:---:|:---:|:---:|
+| Sh | N/A | No | No |
+| Sh | N/A | No | **Yes** |
+| Sh | N/A | **Yes** | No |
+| Sh | N/A | **Yes** | **Yes** |
+| Zsh | N/A | No | No |
+| Zsh | N/A | No | **Yes** |
+| Zsh | N/A | **Yes** | No |
+| Zsh | N/A | **Yes** | **Yes** |
+| Bash | No | No | No |
+| Bash | No | No | **Yes** |
+| Bash | No | **Yes** | No |
+| Bash | No | **Yes** | **Yes** |
+| Bash | **Yes** | No | No |
+| Bash | **Yes** | No | **Yes** |
+| Bash | **Yes** | **Yes** | No |
+| Bash | **Yes** | **Yes** | **Yes** |
+
+That sequence was maintained by using a constraining edge on each of the `Running...` nodes:
+
+```dot
+    {
+        rank=same
+        edge [constraint=true]
+        node [label="Running..."]
+        sh_nn_running ->
+        sh_ni_running ->
+        sh_ln_running ->
+        sh_li_running ->
+        zsh_nn_running ->
+        zsh_ni_running ->
+        zsh_ln_running ->
+        zsh_li_running ->
+        bash_nnn_running ->
+        bash_nni_running ->
+        bash_nln_running ->
+        bash_nli_running ->
+        bash_rnn_running ->
+        bash_rln_running ->
+        bash_rli_running
+    }
+```
+
+This told the layout engine that there was a deliberate ordering there, and the layout engine sought to maintain it. Here's what the graph looks like without that constraining edge:
+
+![As with the original refactored chart, except insted of the sequence of swimlanes running Sh->Zsh->Bash, nn->ni->ln->li, it goes zsh_nn->zsh_ln->zsh_li->zsh_ni, sh_ni->sh_li->bash_rnn->bash->rni->bash_rln->bash_nni->bash_rli->bash_nli->bash_nln->bash_nnn->sh_ln->sh_nn.]({{ site.url }}/assets/sh-zsh-bash-refactor/refactor-output-no-running-constraint/refactor-output-no-running-constraint.svg)
+
+Note that Zsh floated to the top, and the Sh swimlanes are split to both before and after the Bash swimlanes. You can even see how some of the dotted lines are no longer simply vertical; they have to jump over other nodes in the same rank in order to reach the rest of their group. There's a reason it's ordered like that, but I don't understand it well enough to tell you how to predict it.
+
+_There is one other_ constraining samerank edge in the graph, though:
+
+```dot
+        edge [constraint=true style=invis]
+        bash_rnn -> bash_rni -> bash_rln
+```
+
+If you look at the swimlane for Bash/Remote/Non-Login/Interactive, you'll notice is't quite short. In fact, it goes straight to "No path", and doesn't reach the Running state. Since the Running state is where we're applying all of our samerank edge constraints, this particular swimlane doesn't get picked up by it. So we anchor it to its neighbors (Bash/Remote/Non-Login/Non-Interactive and Bash/Remote/Login/Non-Interactive) in order to control its vertical placement.
+
 ### Rank-anchoring
 
 (Note the samerank needed to draw $ENV to the end of the chart.)
