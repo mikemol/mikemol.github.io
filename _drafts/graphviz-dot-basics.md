@@ -124,7 +124,7 @@ graph {
 
 Again, a `dot` rendering:
 
-You can see how the three groups `ABC`, `DEF` and `GHI` are now clustered together.
+You can see how the three groups `ABC`, `DEF` and `GHI` are now clustered together, with boxes drawn arond them.
 
 ### `circo` Layout Engine
 
