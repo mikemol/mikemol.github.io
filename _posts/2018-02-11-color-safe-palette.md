@@ -10,9 +10,7 @@ So, while I've been using [this colorblind palette](http://jfly.iam.u-tokyo.ac.j
 
 ## Percentages RGB, CMYK
 
-<div style="background-color: white; color:black">
-
-| Color Name | R | G | B | C | M | Y | K
+| Color Name | R | G | B | C | M | Y | K |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | <span style="color:#000000; font-weight:bold"> black </span> | 0 | 0 | 0 | 0 | 0 | 0 | 100 |
 | <span style="color:#E69F00; font-weight:bold"> orange </span> | 90 | 60 | 0 | 0 | 50 | 100 | 0 |
@@ -23,11 +21,7 @@ So, while I've been using [this colorblind palette](http://jfly.iam.u-tokyo.ac.j
 | <span style="color:#D55E00; font-weight:bold"> vermillion </span> | 80 | 40 | 0 | 0 | 80 | 100 | 0 |
 | <span style="color:#CC79A7; font-weight:bold"> reddish purple </span> | 80 | 60 | 70 | 10 | 70 | 0 | 0 |
 
-</div>
-
 ## 0-255 Range, Hex and Combined-hex
-
-<div style="background-color: white; color:black">
 
 | Color Name | R | G | B | hex(R) | hex(G) | hex(B) | combined |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -39,5 +33,3 @@ So, while I've been using [this colorblind palette](http://jfly.iam.u-tokyo.ac.j
 | <span style="color:#0072B2; font-weight:bold"> blue </span> | 0 | 114 | 178 | 00 | 72 | B2 | #0072B2
 | <span style="color:#D55E00; font-weight:bold"> vermillion </span> | 213 | 94 | 0 | D5 | 5E | 00 | #D55E00
 | <span style="color:#CC79A7; font-weight:bold"> reddish purple </span> | 204 | 121 | 167 | CC | 79 | A7 | #CC79A7
-
-</div>
