@@ -1,12 +1,42 @@
 ---
 layout: post
 title:  "Asset regeneration script"
-date:   2018-02-11 15:00:00 -0500
-categories: technique colorblind
+date:   2018-02-13 15:00:00 -0500
+categories: tools code blog
 ---
 # An Asset Regeneration Script
 
-So, in the interest of trying to be lazy (really!), I wrote a script to automate the generation of SVG PNG artifacts from the `dot` source files. Here's the source:
+So, in the interest of trying to be lazy (really!), I wrote a script to automate the generation of graphic assets from the `dot` source files. It does a few things for me:
+
+* It only generates files which have been updated (with similar behavior to `make`; it only updates assets if the source file is newer than the assset).
+* It generates both PNG and SVG files (and could generate any format `dot` supports).
+* It quantizes and crushes PNG assets, drastically reducing file size.
+* It commits modified source files to avoid losing work (a generated asset is a conscious effort. I presume it represents a significant change in the source.)
+* It commits generated assets.
+* It saves me manually typing the `dot` commands, or relying on shell history to keep them.
+
+## Workflow
+
+![An illustration of the script flow.]({{ site.url }}/assets/blog-asset-generation/script-flow/script-flow.svg)
+
+Here's how it works:
+
+1. Find all `dot` files in my `assets` folder.
+1. For each `dot` file
+    1. For each format (I specify SVG and PNG)
+        1. Check to see if the `dot` file is newer than the corresponding PNG or SVG.
+            1. If it's newer:
+                1. Commit the `dot` file to the `git` repository, in case the work-in-progress hasn't been committed already.
+                1. Render the asset
+                1. If the asset is a PNG:
+                    1. Force the PNG into indexed RGBA mode using `pngquant`; for many images, this grossly reduces the PNG file size.
+                    1. Run `pngcrush` on the indexed PNG, trying all strategies that use the maximum `zlib` compression. For PNG images which `pngquant` didn't make a significant file size dent in, this will.
+                1. Stage the asset for commit.
+    1. If there are changes staged for commit, commit them.
+
+## Source
+
+Of course, if you visit my blog's [source repo](https://github.com/mikemol/mikemol.github.io), you can [find the source there](https://github.com/mikemol/mikemol.github.io/blob/master/_scripts/regen_assets.sh).
 
 ```bash
 #!/bin/bash
@@ -60,17 +90,4 @@ while IFS= read -r -d '' dotfile ; do
 done < <(find assets -type f -name '*.dot' -print0)
 ```
 
-If you know `bash`, the behavior should be pretty clear, but here's what it does in a nutshell:
-
-1. Find all `dot` files in my `assets` folder.
-1. For each `dot` file
-    1. For each format (I specify SVG and PNG)
-        1. Check to see if the `dot` file is newer than the corresponding PNG or SVG.
-            1. If it's newer:
-                1. Commit the `dot` file to the `git` repository, in case the work-in-progress hasn't been committed already.
-                1. Render the asset
-                1. If the asset is a PNG:
-                    1. Force the PNG into indexed RGBA mode using `pngquant`; for many images, this grossly reduces the PNG file size.
-                    1. Run `pngcrush` on the indexed PNG, trying all strategies that use the maximum `zlib` compression. For PNG images which `pngquant` didn't make a significant file size dent in, this will.
-                1. Stage the asset for commit.
-    1. If there are changes staged for commit, commit them.
+Pretty handy. We'll have to see how automating munging of my `git` repo works out, but I think there's going to be more value in automating it than is lost digging through some strange git history. At least the visual renders will accompany the various versions of the `dot` files, so understanding the impacts of changes will be easier, and I'll have snapshots of works-in-progress to go back to to illustrate _why_ I took one approach or another while demonstrating more about Dot and Graphviz.
