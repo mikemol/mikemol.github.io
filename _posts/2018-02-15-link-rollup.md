@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Link Rollup 2018-02-15
-date:   2018-02-015 21:45:00 -0500
-categories: ifttt integration
+date:   2018-02-16 18:21:00 -0500
+categories: links
 ---
 # Link Rollup 2018-02-15
 
