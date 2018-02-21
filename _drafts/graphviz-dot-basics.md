@@ -110,7 +110,15 @@ You can see the circle, and if you look, you can find the small subgraphs, but t
 
 ### `fdp` Layout Engine
 
-![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and E, F and G are near the bottom of the graph.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-fdp/complicated-undirected-graph-fdp.svg)
+The `man` page description for `fdp` is brief:
+
+> `fdp` draws undirected graphs using a ``spring'' model. It relies  on  a  force‐directed  approach  in  the  spirit of Fruchterman and Reingold (cf. ]]]]]]]][Software‐Practice & Experience 21(11), 1991, pp. 1129‐1164](https://scholar.google.com/scholar?cluster=15659702693092844398&hl=en&as_sdt=0,23)).
+
+Here's what that means for this graph:
+
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. The D-E-F cluster is near the top, while the A-B-C and G-H-I clusters overlap each other at the bottom.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-fdp/complicated-undirected-graph-fdp.svg)
+
+There's no real obvious visual structure to this render. `fdp` is obviously not well-suited to this graph without a lot of tuning work.
 
 ### `neato` Layout Engine
 
