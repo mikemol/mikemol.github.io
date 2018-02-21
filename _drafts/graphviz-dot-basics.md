@@ -88,7 +88,11 @@ graph {
 }
 ```
 
-Remember, this is a _cyclic_ graph; within the graph, there exist two nodes which have more than one path to reach each other. Here's a render with the basic, default `dot` layout engine:
+Remember, this is a _cyclic_ graph; within the graph, there exist two nodes which have more than one path to reach each other. In fact, it's pretty easy to identify three cyclic _subgraphs_ within the larger graph; `A-B-C`, `D-E-F` and `G-H-I`, and these smaller subgraphs are connected to each other. Here's a render with the basic, default `dot` layout engine:
+
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and E, F and G are near the bottom of the graph.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph/complicated-undirected-graph.svg)
+
+Notice how `A-B-C` is near the top of the graph, `D-E-F` is near the middle, and `G-H-I` is near the bottom of the graph. The edge `A-D` is much longer than any other edge, extending all the way from the top to the bottom of the graph. Let's look at some other layout engines.
 
 ### `circo` Layout Engine
 
