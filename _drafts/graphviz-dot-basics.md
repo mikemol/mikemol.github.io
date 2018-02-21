@@ -98,7 +98,7 @@ Notice how `A-B-C` is near the top of the graph, `D-E-F` is near the middle, and
 
 The `man` page description for `circo` is quite a mouthful, and reads:
 
-> `circo` draws graphs using a circular layout (see Six and  Tollis,  GD  '99  and ALENEX  '99, and Kaufmann and Wiese, GD '02.)  The tool identifies biconnected components and draws the nodes of the component on a  circle. The  block‐cut‐ point tree is then laid out using a recursive radial algorithm. Edge crossings within a circle are minimized by placing as many edges on the circle's perime‐ ter  as  possible.  In particular, if the component is outerplanar, the compo‐ nent will have a planar layout.
+> `circo` draws graphs using a circular layout (see [Six and  Tollis,  GD  '99  and ALENEX  '99](https://scholar.google.com/scholar?cluster=9494396738495206724&hl=en&as_sdt=0,23), and [Kaufmann and Wiese, GD '02](https://scholar.google.com/scholar?cluster=278384429215122705&hl=en&as_sdt=0,23).  The tool identifies biconnected components and draws the nodes of the component on a  circle. The  block‐cut‐ point tree is then laid out using a recursive radial algorithm. Edge crossings within a circle are minimized by placing as many edges on the circle's perime‐ ter  as  possible.  In particular, if the component is outerplanar, the compo‐ nent will have a planar layout.
 
 > If a node belongs to multiple non‐trivial biconnected components, the layout puts the node in one of them. By default, this is the first non‐trivial compo‐ nent found in the search from the root component.
 
