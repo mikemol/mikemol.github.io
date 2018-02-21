@@ -58,6 +58,8 @@ graph {
 }
 ```
 
+![Three nodes, labeled 'a', 'b' and 'c'. There is a single line connecting 'a' to 'b', a single line connecting 'b' to 'c', and a single line connecting 'c' back to 'a'.]({{ site.url }}/assets/graphviz-dot-basics/simple-cyclic2/simple-cyclic2.svg)
+
 Now we have three nodes, `a`, `b`. `c`, and they form a loop. If you choose a node and follow the edges, you can (inevitably will, in this case) eventually wind up where you started. Since there's more than two paths between a pair of nodes, this graph is said to be _cyclic_.
 
 For our purposes, we don't _usually_ care about whether a graph is cyclic or acyclic, but Graphviz can occasionally get confused with _directed_ cyclic graphs. More on that (well, directed graphs) later.
