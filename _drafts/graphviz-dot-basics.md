@@ -31,7 +31,8 @@ graph {
     a
     b
     a -- b
-}```
+}
+```
 
 This also happens to be an _acyclic_ graph, which means there is only one path between any two nodes in the graph. It's trivial to make this into a _cyclic_ graph:
 
@@ -39,14 +40,16 @@ This also happens to be an _acyclic_ graph, which means there is only one path b
 graph {
     a -- b
     a -- b
-}```
+}
+```
 
 Now there are two edges between the same two nodes. Since there's more than one path between the two nodes, the graph is no longer acyclic. But drawing two edges directly between the same two nodes feels like cheating to illustrate the concept, so here's another example of a simple cyclic graph:
 
 ```dot
 graph {
     a -- b -- c -- a
-}```
+}
+```
 
 Now we have three nodes, `a`, `b`. `c`, and they form a loop. If you choose a node and follow the edges, you can (inevitably will, in this case) eventually wind up where you started. Since there's more than two paths between a pair of nodes, this graph is said to be _cyclic_.
 
