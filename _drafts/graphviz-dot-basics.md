@@ -134,6 +134,8 @@ Here, you can _very_ clearly see all three cyclic subgraphs, they're well-spaced
 
 ### `osage` Layout Engine
 
+The `osage` layout engine isn't described in the `man` page for Graphviz, and its rendered output is identical to the default `dot` layout engine for this graph:
+
 ![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and E, F and G are near the bottom of the graph.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-osage/complicated-undirected-graph-osage.svg)
 
 ### `patchwork` Layout Engine
