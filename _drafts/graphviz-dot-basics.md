@@ -140,7 +140,13 @@ The `osage` layout engine isn't described in the `man` page for Graphviz, and it
 
 ### `patchwork` Layout Engine
 
-![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and E, F and G are near the bottom of the graph.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-patchwork/complicated-undirected-graph-patchwork.svg)
+The `man` page description for `patchwork` describes something different:
+
+> patchwork draws the graph as a  squarified  treemap  (see  [M.  Bruls  et  al., "Squarified treemaps", Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization, 2000, pp. 33-42](https://scholar.google.com/scholar?cluster=16156845309181182620&hl=en&as_sdt=0,23)). The clusters of the graph are used to  specify  the tree.
+
+![A single 3x3 grid is presented. The nodes A, B and C occupy the first row. The nodes D, F and H occupy the second row. The nodes E, G and I occupy the third row. No edges are presented.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-patchwork/complicated-undirected-graph-patchwork.svg)
+
+All edge information appears to have been lost in this render.
 
 ### `twopi` Layout Engine
 
