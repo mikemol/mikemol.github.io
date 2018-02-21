@@ -24,6 +24,8 @@ graph {
 
 So you see two nodes, named `a` and `b`, and the two nodes are connected by a single edge.
 
+![Two nodes, labeled 'a' and 'b'. There is a line connecting node 'a' to 'b'.]({{ site.url }}/assets/graphviz-dot-basics/simple-undirected/simple-undirected.svg)
+
 To create a node in Dot, all you need to do is mention it by name. This can be on its own, or while declaring an edge. So, this graph is identical to the above:
 
 ```dot
@@ -34,6 +36,9 @@ graph {
 }
 ```
 
+![Two nodes, labeled 'a' and 'b'. There is a line connecting node 'a' to 'b'.]({{ site.url }}/assets/graphviz-dot-basics/simple-undirected2/simple-undirected2.svg)
+
+
 This also happens to be an _acyclic_ graph, which means there is only one path between any two nodes in the graph. It's trivial to make this into a _cyclic_ graph:
 
 ```dot
@@ -42,6 +47,8 @@ graph {
     a -- b
 }
 ```
+
+![Two nodes, labeled 'a' and 'b'. There are two lines connecting node 'a' to 'b'.]({{ site.url }}/assets/graphviz-dot-basics/simple-cyclic/simple-cyclic.svg)
 
 Now there are two edges between the same two nodes. Since there's more than one path between the two nodes, the graph is no longer acyclic. But drawing two edges directly between the same two nodes feels like cheating to illustrate the concept, so here's another example of a simple cyclic graph:
 
