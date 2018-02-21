@@ -96,7 +96,17 @@ Notice how `A-B-C` is near the top of the graph, `D-E-F` is near the middle, and
 
 ### `circo` Layout Engine
 
+The `man` page description for `circo` is quite a mouthful, and reads:
+
+> `circo` draws graphs using a circular layout (see Six and  Tollis,  GD  '99  and ALENEX  '99, and Kaufmann and Wiese, GD '02.)  The tool identifies biconnected components and draws the nodes of the component on a  circle. The  block‐cut‐ point tree is then laid out using a recursive radial algorithm. Edge crossings within a circle are minimized by placing as many edges on the circle's perime‐ ter  as  possible.  In particular, if the component is outerplanar, the compo‐ nent will have a planar layout.
+
+> If a node belongs to multiple non‐trivial biconnected components, the layout puts the node in one of them. By default, this is the first non‐trivial compo‐ nent found in the search from the root component.
+
+Here's what that means in practice for this graph:
+
 ![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. The three small, cyclic graphs are distributed around a circle, with all nodes the same distance from the center of the circle.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-circo/complicated-undirected-graph-circo.svg)
+
+You can see the circle, and if you look, you can find the small subgraphs, but they're not obvioius. Notice `circo` did not choose to place the `A` node next to the `D` node, even though that would have resulted in shorter edges and a cleaner result. Which Graphviz does that sort of thing, it usually means that placement of nodes is somehow dependent on the listing order of the nodes in the source file itself, and you can usually get the result you're looking for by reordering the content in the source file.
 
 ### `fdp` Layout Engine
 
