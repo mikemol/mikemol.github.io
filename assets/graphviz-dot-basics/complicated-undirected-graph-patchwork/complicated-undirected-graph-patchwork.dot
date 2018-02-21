@@ -1,0 +1,18 @@
+graph {
+    layout=patchwork
+    A -- B
+    B -- C
+    C -- A
+
+    D -- E
+    E -- F
+    F -- D
+
+    G -- H
+    H -- I
+    I -- G
+
+    A -- D
+    B -- G
+    H -- E
+}
