@@ -122,7 +122,15 @@ There's no real obvious visual structure to this render. `fdp` is obviously not 
 
 ### `neato` Layout Engine
 
-![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and E, F and G are near the bottom of the graph.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-neato/complicated-undirected-graph-neato.svg)
+The `man` page description for `neato` is also brief:
+
+> `neato`  draws  undirected graphs using ``spring'' models (see [Kamada and Kawai, Information Processing Letters 31:1, April 1989](https://scholar.google.com/scholar?cluster=3559379059294964525&hl=en&as_sdt=0,23)).
+
+This doesn't tell you much, but the results speak for themselves:
+
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. D-E-F is at the top of the graph, A-B-C is at the lower-left, and G-H-I is at the lower right. D-E-F has its D node to the left, while A-B-C has its A node at the top, resulting in only a short distance for the A-D edge. D-E-F has its E node to the right, while G-H-I has its H node at the top, leading to a similarly short edge for E-H. A-B-C has its B node to the right, while G-H-I has its G node to the left, leading to a short B-G edge as well.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-neato/complicated-undirected-graph-neato.svg)
+
+Here, you can _very_ clearly see all three cyclic subgraphs, they're well-spaced from each other, and their interconnections are very clear. The `neato` layout engine is very well-suited to this graph.
 
 ### `osage` Layout Engine
 
