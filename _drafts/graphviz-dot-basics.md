@@ -190,6 +190,8 @@ graph {
 
 Again, a `dot` rendering:
 
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-twopi/complicated-undirected-graph-twopi.svg)
+
 You can see how the three groups `ABC`, `DEF` and `GHI` are now clustered together, with boxes drawn arond them.
 
 ### `circo` Layout Engine
