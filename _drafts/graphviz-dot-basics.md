@@ -154,7 +154,7 @@ The `man` page description for `twopi` describes it as:
 
 > twopi draws graphs using a radial layout (see [G.  Wills,  Symposium  on  Graph Drawing  GD'97, September, 1997](https://scholar.google.com/scholar?cluster=13431559378469939199&hl=en&as_sdt=0,23)).  Basically, one node is chosen as the center and put at the origin.  The remaining nodes are placed on a sequence  of  con centric  circles  centered about the origin, each a fixed radial distance from the previous circle.  All nodes distance 1 from the center are placed  on  the first  circle; all nodes distance 1 from a node on the first circle are placed on the second circle; and so forth.
 
-![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and E, F and G are near the bottom of the graph.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-twopi/complicated-undirected-graph-twopi.svg)
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. G-H-I is near the top of the graph, A-B-C near the middle, and D-E-F is near the bottom-left. B--G and A--D are short edges connecting their two subgraphs, but E--H spans more or less from the top right through the center to the bottom left.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-twopi/complicated-undirected-graph-twopi.svg)
 
 Unfortunately, this doesn't work well for this type of graph.
 
