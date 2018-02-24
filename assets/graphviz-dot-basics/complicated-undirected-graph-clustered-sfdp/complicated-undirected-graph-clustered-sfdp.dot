@@ -1,0 +1,24 @@
+graph {
+    layout=sfdp
+    subgraph clusterA {
+        A -- B
+        B -- C
+        C -- A
+    }
+
+    subgraph clusterB {
+        D -- E
+        E -- F
+        F -- D
+    }
+
+    subgraph clusterC {
+        G -- H
+        H -- I
+        I -- G
+    }
+
+    A -- D
+    B -- G
+    H -- E
+}
