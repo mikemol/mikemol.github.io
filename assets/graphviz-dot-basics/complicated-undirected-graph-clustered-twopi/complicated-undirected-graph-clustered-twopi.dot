@@ -1,4 +1,5 @@
 graph {
+    layout=twopi
     subgraph clusterA {
         A -- B
         B -- C
