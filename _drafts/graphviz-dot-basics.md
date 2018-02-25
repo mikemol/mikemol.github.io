@@ -190,20 +190,34 @@ graph {
 
 Again, a `dot` rendering:
 
-![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-twopi/complicated-undirected-graph-twopi.svg)
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered/complicated-undirected-graph-clustered.svg)
 
 You can see how the three groups `ABC`, `DEF` and `GHI` are now clustered together, with boxes drawn arond them.
 
 ### `circo` Layout Engine
 
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. The three small, cyclic graphs are distributed around a circle, with all nodes the same distance from the center of the circle.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-circo/complicated-undirected-graph-clustered-circo.svg)
+
 ### `fdp` Layout Engine
+
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-fdp/complicated-undirected-graph-clustered-fdp.svg)
 
 ### `neato` Layout Engine
 
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-neato/complicated-undirected-graph-clustered-neato.svg)
+
 ### `osage` Layout Engine
+
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-osage/complicated-undirected-graph-clustered-osage.svg)
 
 ### `patchwork` Layout Engine
 
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-patchwork/complicated-undirected-graph-clustered-patchwork.svg)
+
 ### `sfdp` Layout Engine
 
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-sfdp/complicated-undirected-graph-clustered-sfdp.svg)
+
 ### `twopi` Layout Engine
+
+![There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E.]({{ site.url }}/assets/graphviz-dot-basics/complicated-undirected-graph-clustered-twopi/complicated-undirected-graph-clustered-twopi.svg)
