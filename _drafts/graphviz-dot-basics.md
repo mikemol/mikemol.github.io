@@ -66,7 +66,7 @@ For our purposes, we don't _usually_ care about whether a graph is cyclic or acy
 
 # Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs
 
-So, we covered simple, undirected graphs. Let's look at a more complicated case, so we can briefly explore the available layout engines.
+So, we covered simple, undirected graphs. Let's look at a couple more complicated cases, one with clustering and one without, so we can explore layout engines.
 
 ```dot
 graph {
