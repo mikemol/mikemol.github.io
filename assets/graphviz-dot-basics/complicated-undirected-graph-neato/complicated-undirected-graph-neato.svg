@@ -11,12 +11,12 @@
 <polygon fill="white" stroke="none" points="-152.444,107.36 -152.444,-147.217 126.413,-147.217 126.413,107.36 -152.444,107.36"/>
 <!-- A -->
 <g id="node1" class="node"><title>A</title>
-<ellipse fill="none" stroke="black" cx="-78.933" cy="-17.3203" rx="27" ry="18"/>
+<ellipse fill="#f0e442" stroke="#e69f00" stroke-width="8" cx="-78.933" cy="-17.3203" rx="27" ry="18"/>
 <text text-anchor="middle" x="-78.933" y="-13.6203" font-family="Times,serif" font-size="14.00">A</text>
 </g>
 <!-- B -->
 <g id="node2" class="node"><title>B</title>
-<ellipse fill="none" stroke="black" cx="-52.8931" cy="60.2687" rx="27" ry="18"/>
+<ellipse fill="#f0e442" stroke="#009e73" stroke-width="8" cx="-52.8931" cy="60.2687" rx="27" ry="18"/>
 <text text-anchor="middle" x="-52.8931" y="63.9687" font-family="Times,serif" font-size="14.00">B</text>
 </g>
 <!-- A&#45;&#45;B -->
@@ -25,7 +25,7 @@
 </g>
 <!-- D -->
 <g id="node4" class="node"><title>D</title>
-<ellipse fill="none" stroke="black" cx="-26.0236" cy="-76.2478" rx="27" ry="18"/>
+<ellipse fill="#56b4e9" stroke="#e69f00" stroke-width="8" cx="-26.0236" cy="-76.2478" rx="27" ry="18"/>
 <text text-anchor="middle" x="-26.0236" y="-72.5478" font-family="Times,serif" font-size="14.00">D</text>
 </g>
 <!-- A&#45;&#45;D -->
@@ -34,7 +34,7 @@
 </g>
 <!-- C -->
 <g id="node3" class="node"><title>C</title>
-<ellipse fill="none" stroke="black" cx="-121.444" cy="40.344" rx="27" ry="18"/>
+<ellipse fill="#f0e442" stroke="#cc79a7" stroke-width="8" cx="-121.444" cy="40.344" rx="27" ry="18"/>
 <text text-anchor="middle" x="-121.444" y="44.044" font-family="Times,serif" font-size="14.00">C</text>
 </g>
 <!-- B&#45;&#45;C -->
@@ -43,7 +43,7 @@
 </g>
 <!-- G -->
 <g id="node7" class="node"><title>G</title>
-<ellipse fill="none" stroke="black" cx="24.4981" cy="76.5745" rx="27" ry="18"/>
+<ellipse fill="#d55e00" stroke="#e69f00" stroke-width="8" cx="24.4981" cy="76.5745" rx="27" ry="18"/>
 <text text-anchor="middle" x="24.4981" y="80.2745" font-family="Times,serif" font-size="14.00">G</text>
 </g>
 <!-- B&#45;&#45;G -->
@@ -56,7 +56,7 @@
 </g>
 <!-- E -->
 <g id="node5" class="node"><title>E</title>
-<ellipse fill="none" stroke="black" cx="54.0948" cy="-59.4264" rx="27" ry="18"/>
+<ellipse fill="#56b4e9" stroke="#009e73" stroke-width="8" cx="54.0948" cy="-59.4264" rx="27" ry="18"/>
 <text text-anchor="middle" x="54.0948" y="-55.7264" font-family="Times,serif" font-size="14.00">E</text>
 </g>
 <!-- D&#45;&#45;E -->
@@ -65,7 +65,7 @@
 </g>
 <!-- F -->
 <g id="node6" class="node"><title>F</title>
-<ellipse fill="none" stroke="black" cx="26.16" cy="-125.217" rx="27" ry="18"/>
+<ellipse fill="#56b4e9" stroke="#cc79a7" stroke-width="8" cx="26.16" cy="-125.217" rx="27" ry="18"/>
 <text text-anchor="middle" x="26.16" y="-121.517" font-family="Times,serif" font-size="14.00">F</text>
 </g>
 <!-- E&#45;&#45;F -->
@@ -78,7 +78,7 @@
 </g>
 <!-- H -->
 <g id="node8" class="node"><title>H</title>
-<ellipse fill="none" stroke="black" cx="79.1276" cy="15.6634" rx="27" ry="18"/>
+<ellipse fill="#d55e00" stroke="#009e73" stroke-width="8" cx="79.1276" cy="15.6634" rx="27" ry="18"/>
 <text text-anchor="middle" x="79.1276" y="19.3634" font-family="Times,serif" font-size="14.00">H</text>
 </g>
 <!-- G&#45;&#45;H -->
@@ -91,7 +91,7 @@
 </g>
 <!-- I -->
 <g id="node9" class="node"><title>I</title>
-<ellipse fill="none" stroke="black" cx="95.4126" cy="85.3605" rx="27" ry="18"/>
+<ellipse fill="#d55e00" stroke="#cc79a7" stroke-width="8" cx="95.4126" cy="85.3605" rx="27" ry="18"/>
 <text text-anchor="middle" x="95.4126" y="89.0605" font-family="Times,serif" font-size="14.00">I</text>
 </g>
 <!-- H&#45;&#45;I -->
