@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs"
-date:   2018-02-25 21:41:00 -0500
+date:   2018-02-27 09:00:00 -0500
 categories: graphviz dot
 ---
 # Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs
