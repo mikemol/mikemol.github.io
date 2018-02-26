@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Dot Language Basics"
-date:   2018-02-04 15:40:00 -0500
+title:  "Dot Language Basics Pt 1: Nodes, Edges and Simple Undirected Graphs"
+date:   2018-02-25 21:30:00 -0500
 categories: graphviz dot
 ---
 # Dot Language Basics Pt 1: Nodes, Edges and Simple Undirected graphs
