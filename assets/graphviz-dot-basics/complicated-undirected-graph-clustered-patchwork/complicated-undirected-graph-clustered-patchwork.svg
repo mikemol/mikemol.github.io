@@ -20,47 +20,47 @@
 </g>
 <!-- A -->
 <g id="node1" class="node"><title>A</title>
-<polygon fill="none" stroke="black" points="23.7172,-94.8689 0,-94.8689 0,-52.7054 23.7172,-52.7054 23.7172,-94.8689"/>
+<polygon fill="#f0e442" stroke="#e69f00" stroke-width="8" points="23.7172,-94.8689 0,-94.8689 0,-52.7054 23.7172,-52.7054 23.7172,-94.8689"/>
 <text text-anchor="middle" x="11.8586" y="-70.0871" font-family="Times,serif" font-size="14.00">A</text>
 </g>
 <!-- B -->
 <g id="node2" class="node"><title>B</title>
-<polygon fill="none" stroke="black" points="47.4344,-94.8689 23.7172,-94.8689 23.7172,-52.7054 47.4344,-52.7054 47.4344,-94.8689"/>
+<polygon fill="#f0e442" stroke="#009e73" stroke-width="8" points="47.4344,-94.8689 23.7172,-94.8689 23.7172,-52.7054 47.4344,-52.7054 47.4344,-94.8689"/>
 <text text-anchor="middle" x="35.5758" y="-70.0871" font-family="Times,serif" font-size="14.00">B</text>
 </g>
 <!-- D -->
 <g id="node4" class="node"><title>D</title>
-<polygon fill="none" stroke="black" points="71.1516,-94.8689 47.4344,-94.8689 47.4344,-52.7054 71.1516,-52.7054 71.1516,-94.8689"/>
+<polygon fill="#56b4e9" stroke="#e69f00" stroke-width="8" points="71.1516,-94.8689 47.4344,-94.8689 47.4344,-52.7054 71.1516,-52.7054 71.1516,-94.8689"/>
 <text text-anchor="middle" x="59.293" y="-70.0871" font-family="Times,serif" font-size="14.00">D</text>
 </g>
 <!-- C -->
 <g id="node3" class="node"><title>C</title>
-<polygon fill="none" stroke="black" points="47.4344,-52.7054 0,-52.7054 0,-31.6237 47.4344,-31.6237 47.4344,-52.7054"/>
+<polygon fill="#f0e442" stroke="#cc79a7" stroke-width="8" points="47.4344,-52.7054 0,-52.7054 0,-31.6237 47.4344,-31.6237 47.4344,-52.7054"/>
 <text text-anchor="middle" x="23.7172" y="-38.4645" font-family="Times,serif" font-size="14.00">C</text>
 </g>
 <!-- G -->
 <g id="node7" class="node"><title>G</title>
-<polygon fill="none" stroke="black" points="31.6219,-31.6237 0,-31.6237 0,-0 31.6219,-0 31.6219,-31.6237"/>
+<polygon fill="#d55e00" stroke="#e69f00" stroke-width="8" points="31.6219,-31.6237 0,-31.6237 0,-0 31.6219,-0 31.6219,-31.6237"/>
 <text text-anchor="middle" x="15.8109" y="-12.1118" font-family="Times,serif" font-size="14.00">G</text>
 </g>
 <!-- E -->
 <g id="node5" class="node"><title>E</title>
-<polygon fill="none" stroke="black" points="94.8689,-94.8689 71.1516,-94.8689 71.1516,-52.7054 94.8689,-52.7054 94.8689,-94.8689"/>
+<polygon fill="#56b4e9" stroke="#009e73" stroke-width="8" points="94.8689,-94.8689 71.1516,-94.8689 71.1516,-52.7054 94.8689,-52.7054 94.8689,-94.8689"/>
 <text text-anchor="middle" x="83.0102" y="-70.0871" font-family="Times,serif" font-size="14.00">E</text>
 </g>
 <!-- F -->
 <g id="node6" class="node"><title>F</title>
-<polygon fill="none" stroke="black" points="94.8689,-52.7054 47.4344,-52.7054 47.4344,-31.6237 94.8689,-31.6237 94.8689,-52.7054"/>
+<polygon fill="#56b4e9" stroke="#cc79a7" stroke-width="8" points="94.8689,-52.7054 47.4344,-52.7054 47.4344,-31.6237 94.8689,-31.6237 94.8689,-52.7054"/>
 <text text-anchor="middle" x="71.1516" y="-38.4645" font-family="Times,serif" font-size="14.00">F</text>
 </g>
 <!-- H -->
 <g id="node8" class="node"><title>H</title>
-<polygon fill="none" stroke="black" points="63.2438,-31.6237 31.6219,-31.6237 31.6219,-0 63.2438,-0 63.2438,-31.6237"/>
+<polygon fill="#d55e00" stroke="#009e73" stroke-width="8" points="63.2438,-31.6237 31.6219,-31.6237 31.6219,-0 63.2438,-0 63.2438,-31.6237"/>
 <text text-anchor="middle" x="47.4328" y="-12.1118" font-family="Times,serif" font-size="14.00">H</text>
 </g>
 <!-- I -->
 <g id="node9" class="node"><title>I</title>
-<polygon fill="none" stroke="black" points="94.8657,-31.6237 63.2438,-31.6237 63.2438,-8.88178e-15 94.8657,-8.88178e-15 94.8657,-31.6237"/>
+<polygon fill="#d55e00" stroke="#cc79a7" stroke-width="8" points="94.8657,-31.6237 63.2438,-31.6237 63.2438,-8.88178e-15 94.8657,-8.88178e-15 94.8657,-31.6237"/>
 <text text-anchor="middle" x="79.0547" y="-12.1118" font-family="Times,serif" font-size="14.00">I</text>
 </g>
 </g>
