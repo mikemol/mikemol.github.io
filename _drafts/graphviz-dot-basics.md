@@ -70,6 +70,16 @@ So, we covered simple, undirected graphs. Let's look at a couple more complicate
 
 ```dot
 graph {
+    A [style="filled" fillcolor="#F0E442" color="#E69F00" penwidth=8]
+    B [style="filled" fillcolor="#F0E442" color="#009E73" penwidth=8]
+    C [style="filled" fillcolor="#F0E442" color="#CC79A7" penwidth=8]
+    D [style="filled" fillcolor="#56B4E9" color="#E69F00" penwidth=8]
+    E [style="filled" fillcolor="#56B4E9" color="#009E73" penwidth=8]
+    F [style="filled" fillcolor="#56B4E9" color="#CC79A7" penwidth=8]
+    G [style="filled" fillcolor="#D55E00" color="#E69F00" penwidth=8]
+    H [style="filled" fillcolor="#D55E00" color="#009E73" penwidth=8]
+    I [style="filled" fillcolor="#D55E00" color="#CC79A7" penwidth=8]
+
     A -- B
     B -- C
     C -- A
@@ -88,12 +98,22 @@ graph {
 }
 ```
 
-Remember, this is a _cyclic_ graph; within the graph, there exist two nodes which have more than one path to reach each other. In fact, it's pretty easy to identify three cyclic _subgraphs_ within the larger graph; `A-B-C`, `D-E-F` and `G-H-I`, and these smaller subgraphs are connected to each other.
+Remember, this is a _cyclic_ graph; within the graph, there exist two nodes which have more than one path to reach each other. In fact, it's pretty easy to identify three cyclic _subgraphs_ within the larger graph; `A-B-C`, `D-E-F` and `G-H-I`, and these smaller subgraphs are connected to each other. For visualizations' sake, I've added color information to each node, so the nodes will be easier to identify. Since we're dealing with three sets of three nodes, I've color-coded each node based on both which grouping it's part of, and which member of which grouping it is.
 
 Now let's consider how we might draw attention to those subgraphs in the Dot language, by wrapping them up with clusters:
 
 ```dot
 graph {
+    A [style="filled" fillcolor="#F0E442" color="#E69F00" penwidth=8]
+    B [style="filled" fillcolor="#F0E442" color="#009E73" penwidth=8]
+    C [style="filled" fillcolor="#F0E442" color="#CC79A7" penwidth=8]
+    D [style="filled" fillcolor="#56B4E9" color="#E69F00" penwidth=8]
+    E [style="filled" fillcolor="#56B4E9" color="#009E73" penwidth=8]
+    F [style="filled" fillcolor="#56B4E9" color="#CC79A7" penwidth=8]
+    G [style="filled" fillcolor="#D55E00" color="#E69F00" penwidth=8]
+    H [style="filled" fillcolor="#D55E00" color="#009E73" penwidth=8]
+    I [style="filled" fillcolor="#D55E00" color="#CC79A7" penwidth=8]
+
     subgraph clusterA {
         A -- B
         B -- C
