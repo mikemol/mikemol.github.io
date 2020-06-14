@@ -4,7 +4,6 @@ title:  "Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undi
 date:   2018-02-27 09:00:00 -0500
 categories: graphviz dot
 ---
-# Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs
 
 So, we covered simple, undirected graphs. Let's look at a couple more complicated cases, one with clustering and one without, so we can explore layout engines.
 

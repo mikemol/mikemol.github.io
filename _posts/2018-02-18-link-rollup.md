@@ -4,7 +4,6 @@ title: Link Rollup 2018-02-15
 date:   2018-02-16 18:21:00 -0500
 categories: links
 ---
-# Link Rollup 2018-02-15
 
 So, the first (probably)-weekly link rollup. Rather than say "oh, cool, look at this!" for everything I spot that I think is useful or interesting, I'll just drop the link in a queue and flush the queue as a single post later.
 

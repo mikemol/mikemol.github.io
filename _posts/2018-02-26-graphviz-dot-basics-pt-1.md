@@ -4,7 +4,6 @@ title:  "Dot Language Basics Pt 1: Nodes, Edges and Simple Undirected Graphs"
 date:   2018-02-26 09:00:00 -0500
 categories: graphviz dot
 ---
-# Dot Language Basics Pt 1: Nodes, Edges and Simple Undirected graphs
 
 I was asked to do a piece on the basics of Graphviz. I'm going to assume you can find a way to access the software; anything I say here will be out of date soon enough. So I'm going to talk about the Dot language itself, and how a handful of simple graphs behave in different layout engines.
 

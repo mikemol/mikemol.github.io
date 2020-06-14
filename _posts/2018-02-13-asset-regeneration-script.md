@@ -4,7 +4,6 @@ title:  "Asset regeneration script"
 date:   2018-02-13 15:00:00 -0500
 categories: tools code blog
 ---
-# An Asset Regeneration Script
 
 So, in the interest of trying to be lazy (really!), I wrote a script to automate the generation of graphic assets from the `dot` source files. It does a few things for me:
 
