@@ -4,7 +4,6 @@ title:  "A Color-Safe Palette"
 date:   2018-02-11 15:00:00 -0500
 categories: technique colorblind
 ---
-# A Color-safe Palette
 
 So, while I've been using [this colorblind palette](http://jfly.iam.u-tokyo.ac.jp/color/#pallet) by Masataka Okabe and Kei Ito, the palette is presented only as a screenshot; I can't copy/paste values. Worse, it doesn't come with hex values, which are what I'm most likely to need. So here's that same palette presented as a pair of tables, one with decimal values for channel percentages, and one with with decimal (0-255 range), hex and combined-hex values.
 

@@ -3,9 +3,8 @@ layout: post
 title:  "VDI and Containers"
 date:   2018-03-24 18:00:00 -0400
 categories: containers
+tags: containers
 ---
-
-# VDI and Containers
 
 The more I dig into containers, the more I'm convinced they should be used to implement VDI. An easy start would be to use a single container for the entire login session, accessed using a thin client running X or RDP.
 

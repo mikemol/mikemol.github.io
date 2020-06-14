@@ -4,7 +4,6 @@ title:  "Touchpad troubles"
 date:   2018-02-10 15:00:00 -0500
 categories: hardware trouble
 ---
-# Touchpad troubles
 
 So, my Lenovo Yoga 13 has always had trouble with its touchpad. Previously, on a cold boot, the touchpad wouldn't work. Simply suspending and resuming the laptop would be enough to make it work, so it wasn't a huge concern.
 
