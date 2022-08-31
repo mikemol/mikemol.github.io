@@ -35,8 +35,6 @@ Here's how it works:
 
 ## Source
 
-Of course, if you visit my blog's [source repo](https://github.com/mikemol/mikemol.github.io), you can [find the source there](https://github.com/mikemol/mikemol.github.io/blob/master/_scripts/regen_assets.sh).
-
 ```bash
 #!/bin/bash
 fmts="svg png"
