@@ -15,12 +15,12 @@ Here's some of the output of `dmidecode`:
 
 ```dmidecode
 System Information
-	Manufacturer: LENOVO
-	Product Name: Mocca 2.0
-	Version: Lenovo Ideapad YOGA 13
-	Wake-up Type: Power Switch
-	SKU Number: LENOVO_BI_IDEAPAD66
-	Family: IDEAPAD
+ Manufacturer: LENOVO
+ Product Name: Mocca 2.0
+ Version: Lenovo Ideapad YOGA 13
+ Wake-up Type: Power Switch
+ SKU Number: LENOVO_BI_IDEAPAD66
+ Family: IDEAPAD
 ```
 
 Here's the output of `lsusb`:
@@ -57,6 +57,5 @@ Here's the output of `lsusb -t`:
         |__ Port 4: Dev 4, If 0, Class=Wireless, Driver=btusb, 480M
         |__ Port 5: Dev 5, If 0, Class=Human Interface Device, Driver=usbhid, 12M
 ```
-
 
 (The content for this post was lost somehow. So this is a total rewrite. It's bizarre, because I thought I viewed it on the live site. Ah well. This is what unit tests are for. Suppose I'll need to figure out unit tests for my blog, like _there's content in every file under `_posts_`! ... Actually, that's not a bad idea. Could possibly even validate that all the links and embedded resources work...I'm doing a `git` workflow for my blog, so why not?)

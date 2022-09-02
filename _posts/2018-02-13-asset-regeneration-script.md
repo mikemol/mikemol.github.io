@@ -7,12 +7,12 @@ categories: tools code blog
 
 So, in the interest of trying to be lazy (really!), I wrote a script to automate the generation of graphic assets from the `dot` source files. It does a few things for me:
 
-* It only generates files which have been updated (with similar behavior to `make`; it only updates assets if the source file is newer than the assset).
+* It only generates files that have been updated (with similar behavior to `make`; it only updates assets if the source file is newer than the asset).
 * It generates both PNG and SVG files (and could generate any format `dot` supports).
 * It quantizes and crushes PNG assets, drastically reducing file size.
 * It commits modified source files to avoid losing work (a generated asset is a conscious effort. I presume it represents a significant change in the source.)
 * It commits generated assets.
-* It saves me manually typing the `dot` commands, or relying on shell history to keep them.
+* It saves me manually typing the `dot` commands or relying on shell history to keep them.
 
 ## Workflow
 
@@ -29,7 +29,7 @@ Here's how it works:
                 1. Render the asset
                 1. If the asset is a PNG:
                     1. Force the PNG into indexed RGBA mode using `pngquant`; for many images, this grossly reduces the PNG file size.
-                    1. Run `pngcrush` on the indexed PNG, trying all strategies that use the maximum `zlib` compression. For PNG images which `pngquant` didn't make a significant file size dent in, this will.
+                    1. Run `pngcrush` on the indexed PNG, trying all strategies that use the maximum Zlib compression. For PNG images which `pngquant` didn't make a significant file size dent in, this will.
                 1. Stage the asset for commit.
     1. If there are changes staged for commit, commit them.
 
@@ -87,4 +87,4 @@ while IFS= read -r -d '' dotfile ; do
 done < <(find assets -type f -name '*.dot' -print0)
 ```
 
-Pretty handy. We'll have to see how automating munging of my `git` repo works out, but I think there's going to be more value in automating it than is lost digging through some strange git history. At least the visual renders will accompany the various versions of the `dot` files, so understanding the impacts of changes will be easier, and I'll have snapshots of works-in-progress to go back to to illustrate _why_ I took one approach or another while demonstrating more about Dot and Graphviz.
+Pretty handy. We'll have to see how automating munging of my `git` repo works out, but I think there's going to be more value in automating it than is lost digging through some strange git history. At least the visual renders will accompany the various versions of the dotfiles, so understanding the impacts of changes will be easier, and I'll have snapshots of works-in-progress to go back to illustrate _why__ I took one approach or another while demonstrating more about Dot and Graphviz.

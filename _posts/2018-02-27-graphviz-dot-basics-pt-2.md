@@ -91,8 +91,8 @@ Let's look at some other layout engines.
 
 The `man` page description for `circo` is quite a mouthful, and reads:
 
-> `circo` draws graphs using a circular layout (see [Six and  Tollis,  GD  '99  and ALENEX  '99](https://scholar.google.com/scholar?cluster=9494396738495206724&hl=en&as_sdt=0,23), and [Kaufmann and Wiese, GD '02](https://scholar.google.com/scholar?cluster=278384429215122705&hl=en&as_sdt=0,23). The tool identifies biconnected components and draws the nodes of the component on a  circle. The  block‐cut‐ point tree is then laid out using a recursive radial algorithm. Edge crossings within a circle are minimized by placing as many edges on the circle's perimeter as possible. In particular, if the component is outerplanar, the compo‐ nent will have a planar layout.
-
+> `circo` draws graphs using a circular layout (see [Six and  Tollis,  GD  '99  and ALENEX  '99](https://scholar.google.com/scholar?cluster=9494396738495206724&hl=en&as_sdt=0,23), and [Kaufmann and Wiese, GD '02](https://scholar.google.com/scholar?cluster=278384429215122705&hl=en&as_sdt=0,23). The tool identifies biconnected components and draws the nodes of the component on a  circle. The  block‐cut‐ point tree is then laid out using a recursive radial algorithm. Edge crossings within a circle are minimized by placing as many edges on the circle's perimeter as possible. In particular, if the component is outerplanar, the component will have a planar layout.
+>
 > If a node belongs to multiple non‐trivial biconnected components, the layout puts the node in one of them. By default, this is the first non‐trivial component found in the search from the root component.
 
 Here's what that means in practice for these graphs:
@@ -103,7 +103,7 @@ Here's what that means in practice for these graphs:
 
 The first thing you'll notice is that both renders look identical; the `cluster` keyword is not part of the Dot language itself, and so whether or not it does anything depends on the layout engine.
 
-You can see the circle, and if you look, you can find the small subgraphs, but they're not obvioius. Notice `circo` did not choose to place the `A` node next to the `D` node, even though that would have resulted in shorter edges and a cleaner result. When Graphviz does that sort of thing, it usually means that placement of nodes is somehow dependent on the listing order of the nodes in the source file itself, and you can usually get the result you're looking for by reordering the content in the source file.
+You can see the circle, and if you look, you can find the small subgraphs, but they're not obvious. Notice `circo` did not choose to place the `A` node next to the `D` node, even though that would have resulted in shorter edges and a cleaner result. When Graphviz does that sort of thing, it usually means that placement of nodes is somehow dependent on the listing order of the nodes in the source file itself, and you can usually get the result you're looking for by reordering the content in the source file.
 
 ### `fdp` Layout Engine
 
@@ -137,7 +137,7 @@ The first thing you should notice: There's no difference between the clustered a
 
 The `man` page description for `patchwork` describes something different:
 
-> patchwork draws the graph as a  squarified  treemap  (see  [M.  Bruls  et  al., "Squarified treemaps", Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization, 2000, pp. 33-42](https://scholar.google.com/scholar?cluster=16156845309181182620&hl=en&as_sdt=0,23)). The clusters of the graph are used to  specify  the tree.
+> patchwork draws the graph as a squarified  treemap  (see  [M.  Bruls  et  al., "Squarified treemaps", Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization, 2000, pp. 33-42](https://scholar.google.com/scholar?cluster=16156845309181182620&hl=en&as_sdt=0,23)). The clusters of the graph are used to  specify  the tree.
 
 | Clustered | Non-clustered |
 | --- | --- |

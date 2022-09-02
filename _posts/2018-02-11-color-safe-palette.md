@@ -17,7 +17,7 @@ So, while I've been using [this colorblind palette](http://jfly.iam.u-tokyo.ac.j
 | <span style="color:#009E73; font-weight:bold"> bluish green </span> | 0 | 60 | 50 | 95 | 0 | 75 | 0 |
 | <span style="color:#F0E442; font-weight:bold"> yellow </span> | 95 | 90 | 25 | 10 | 5 | 90 | 0 |
 | <span style="color:#0072B2; font-weight:bold"> blue </span> | 0 | 45 | 70 | 100 | 50 | 0 | 0 |
-| <span style="color:#D55E00; font-weight:bold"> vermillion </span> | 80 | 40 | 0 | 0 | 80 | 100 | 0 |
+| <span style="color:#D55E00; font-weight:bold"> vermilion </span> | 80 | 40 | 0 | 0 | 80 | 100 | 0 |
 | <span style="color:#CC79A7; font-weight:bold"> reddish purple </span> | 80 | 60 | 70 | 10 | 70 | 0 | 0 |
 
 ## 0-255 Range, Hex and Combined-hex
@@ -30,5 +30,5 @@ So, while I've been using [this colorblind palette](http://jfly.iam.u-tokyo.ac.j
 | <span style="color:#009E73; font-weight:bold"> bluish green </span> | 0 | 158 | 115 | 00 | 9E | 73 | #009E73
 | <span style="color:#F0E442; font-weight:bold"> yellow </span> | 240 | 228 | 66 | F0 | E4 | 42 | #F0E442
 | <span style="color:#0072B2; font-weight:bold"> blue </span> | 0 | 114 | 178 | 00 | 72 | B2 | #0072B2
-| <span style="color:#D55E00; font-weight:bold"> vermillion </span> | 213 | 94 | 0 | D5 | 5E | 00 | #D55E00
+| <span style="color:#D55E00; font-weight:bold"> vermilion </span> | 213 | 94 | 0 | D5 | 5E | 00 | #D55E00
 | <span style="color:#CC79A7; font-weight:bold"> reddish purple </span> | 204 | 121 | 167 | CC | 79 | A7 | #CC79A7

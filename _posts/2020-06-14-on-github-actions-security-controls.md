@@ -24,7 +24,7 @@ However, defining the pipelines entirely within the `git` repository your source
 
 In other pipeline tools like Concourse-CI or Jenkins, you can deal with this by filtering jobs out by controlling which branches get considered for work. It's _sort of_ there with GitHub Actions, except the control point is present in the very same `git` commit as workflow code that may or may not get executed.
 
-That means that a foolish actor *can modify both the automation actions and the instructions on whether or not to perform those actions in the same feature branch*, even the same commit. As a control point, it's not helpful.
+That means that a foolish actor _can modify both the automation actions and the instructions on whether or not to perform those actions in the same feature branch_, even the same commit. As a control point, it's not helpful.
 
 ## The ugly
 

@@ -37,7 +37,6 @@ graph {
 
 ![Two nodes, labeled 'a' and 'b'. There is a line connecting node 'a' to 'b'.]({{ site.url }}/assets/graphviz-dot-basics/simple-undirected2/simple-undirected2.svg)
 
-
 This also happens to be an _acyclic_ graph, which means there is only one path between any two nodes in the graph. It's trivial to make this into a _cyclic_ graph:
 
 ```dot
