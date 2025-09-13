@@ -5,7 +5,7 @@ name: Deploy MkDocs to GitHub Pages
 on:
   push:
     branches:
-      - main  # Or master, depending on your default branch name
+      - main
 
 permissions:
   contents: write
@@ -24,6 +24,15 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      # Updated step to install all system dependencies at once
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            graphviz \
+            pngquant \
+            pngcrush
 
       - name: Build MkDocs site
         run: mkdocs build
