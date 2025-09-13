@@ -19,3 +19,8 @@ Thumbs.db
 # Temporary Files
 *~
 *.swp
+
+*.png
+
+.doit.db
+.tmp/
