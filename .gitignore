@@ -1,26 +1,13 @@
-# Python Virtual Environment
-.venv/
-
-# Python Cache
 __pycache__/
-*.py[cod]
-*$py.class
-
-# MkDocs Build Artifacts
-site/
-
-# OS-specific Files
-.DS_Store
-Thumbs.db
-
-# Editor/IDE Files
-.vscode/
-
-# Temporary Files
-*~
-*.swp
-
-*.png
-
 .doit.db
+.DS_Store
 .tmp/
+.venv/
+.vscode/
+*.png
+*.py[cod]
+*.swp
+*~
+*$py.class
+site/   
+Thumbs.db
