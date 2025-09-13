@@ -1,0 +1,28 @@
+digraph script_flow {
+    begin -> find_dot_files -> for_each_dot_file -> for_each_format -> if_newer -> commit_dot -> render_asset -> if_asset_png -> pngquant -> pngcrush -> stage_for_commit -> for_each_format
+    for_each_format -> if_not_newer -> for_each_format
+    render_asset -> if_asset_not_png -> for_each_format
+    for_each_format -> no_more_formats -> commit_staged -> for_each_dot_file
+    for_each_dot_file -> no_more_dot_files -> done
+
+    begin [label="BEGIN"]
+    find_dot_files [label="Find 'dot' files"]
+    for_each_dot_file [label="For each 'dot' file"]
+    for_each_format [label="For each format"]
+    no_more_dot_files [label="No more 'dot' files" shape=none]
+    if_newer [label="If 'dot' file newer than asset"]
+    no_more_formats [label="No more formats" shape=none]
+    if_not_newer [label="If 'dot' file is not newer than asset"]
+    commit_dot [label="Commit 'dot' file"]
+    render_asset [label="Render asset"]
+    if_asset_not_png [label="If asset is not a PNG"]
+    if_asset_png [label="If asset is a PNG"]
+    pngquant [label="Quantize PNG"]
+    pngcrush [label="Crush PNG"]
+    stage_for_commit [label="Stage asset for commit"]
+    commit_staged [label="Commit staged files"]
+    done [label="FINISH"]
+
+    stage_for_commit -> commit_staged [style=invisible dir=none]
+    commit_staged -> done [style=invisible dir=none]
+}

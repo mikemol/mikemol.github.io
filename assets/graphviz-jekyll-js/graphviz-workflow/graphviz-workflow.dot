@@ -1,0 +1,11 @@
+digraph graphviz_workflow {
+    write_asset -> {svg png} [label="Emit outputs"]
+    svg -> discard [label="GH Pages doesn't like SVG"]
+    png -> rebuild -> embed -> {rewrite_asset done}
+
+    rewrite_asset -> rebuild
+
+    write_asset [label="Write DOT\nSeparately"]
+    rebuild [label="Rebuild asset\nat higherDPI\nand scale down"]
+    rewrite_asset [label="Tweak asset\nfor use case"]
+}

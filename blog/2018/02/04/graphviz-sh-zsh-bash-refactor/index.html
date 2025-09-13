@@ -1,0 +1,697 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mike Mol's blog. Discussing why's, how's and random technical musings.">
+      
+      
+        <meta name="author" content="Mike Mol">
+      
+      
+        <link rel="canonical" href="https://mikemol.github.io/blog/2018/02/04/graphviz-sh-zsh-bash-refactor/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>Sh-Zsh-Bash Chart Refactor - Mike's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","UA-112008517-1"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","UA-112008517-1",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=UA-112008517-1",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#concerns" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Mike&#39;s Notes" class="md-header__button md-logo" aria-label="Mike's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mike's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sh-Zsh-Bash Chart Refactor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mikemol/mikemol.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mikemol/mikemol.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Blog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Mike&#39;s Notes" class="md-nav__button md-logo" aria-label="Mike's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mike's Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mikemol/mikemol.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mikemol/mikemol.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Sh-Zsh-Bash Chart Refactor</h1>
+
+<p>So, on the Grand Rapids Slack team, T.J. Zimmerman shared an interesting chart (originally by <a href="https://github.com/flowblok">Peter Ward</a>, from his blog post <a href="https://blog.flowblok.id.au/2013-02/shell-startup-scripts.html">here</a>) which showed the behaviors of <code>sh</code>, <code>zsh</code> and <code>bash</code> as they built (and tore down) their environments in each of (non-)remote, (non-)login and (non-)interactive sessions. It was interesting in that it conveyed a huge amount of very useful information, but I was, well, offended that it didn't seem to do so well.</p>
+<p>I haven't (yet) secured Peter's permission to embed his image here, so you'll have to go look at it in his blog post listed above. But I'll describe my issues with it here.</p>
+<p>Before I continue, let be clear that he clearly did a huge amount of research building his post (and his charts), and the information he assembled visually is quite valuable. He gets the credit for the research.</p>
+<p>That said...</p>
+<h2 id="concerns">Concerns<a class="headerlink" href="#concerns" title="Permanent link">&para;</a></h2>
+<ol>
+<li>I found the chart to be difficult to process, visually; I'm not in any degree color-blind, but the closely-spaced lines were difficult to follow, and more than once while rebuilding the chart, I followed the wrong branch at one point or another because of the color-coded switchback approach.</li>
+<li>If you don't read the supporting text around the chart, it's not clear what the <code>/etc/bash.bashrc -&gt; {~/.profile, ~/.bash_profile, ~/.bash_login} -&gt; running</code> construct means; I initially thought it implied each of <code>{~/.profile, ~/.bash_profile, ~/.bash_login}</code> would be consumed in some unclear order, but it turns out that subsequent entries in the list are only consumed if earlier entries aren't found.</li>
+<li>It's very difficult to follow the flow in reverse; choose a node further down in the chart, and try to walk the chart backwards. Perhaps you'll have an easier time than I did, but I found the edges crowded and the paths complex, especially around the <code>bash</code>-specific paths.</li>
+</ol>
+<p>I thought, "I can do better than this. It won't even take that long." Well, it took me over a week of spare cycles at home to get Graphviz to produce something I was satisfied with. I was at least half-wrong, but I certainly learned a lot along the way! And, boy, did it produce a lot of blog fodder.</p>
+<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<p>Here's (mostly; I found and fixed a bug or two) the same data as in the original chart, but cleaned up:</p>
+<p><img alt="A chart showing each of Sh, Zsh and Bash session setup and teardown workflows. Each shell variant covered includes each combination of non-login and login, non-interactive and interactive sessions. Bash further includes non-remote vs remote workflows. Non-login, non-interactive workflows are drawn in black. Non-login, interactive workflows are drawn in orange. Login, non-interactive workflows are drawn in sky blue. Login, interactive workflows are drawn in sea green. On the left is a column labeling the workflow by shell type and session type. On the right is a column containing the label 'Running...'. In between are columns with the occasional label identifying other files that may be consumed. The Sh non-login, non-interactive workflow proceeds directly to the Running state. The Sh non-login, interactive workflow evaluates $ENV, and then proceeds to the Running state. The Sh login, non-interactive state evaluates ~/.profile, then proceeds to the Running state. The Sh login, interactive state evaluates ~/.profile, then $ENV, and finally proceeds to the Running state. The Zsh non-login, non-interactive workflow evaluates /etc/zshenv, then ~/.zshenv, and then proceeds to the Running state. The Zsh non-login, interactive workflow evaluates ~/etc/zshenv, then ~/.zshenv, and finally ~/.zshrc before proceeding to the Running state. The Zsh login, non-interactive state evaluates ~/etc/zshenv, then ~/.zshenv, then ~/.zprofile, ~/.zlogin, then enters the Running state, and finally evaluates ~/.zlogout. The Zsh login, interactive workflow evaluates ~/.etc/zshenv, ~/.zshenv, ~/.zprofile, ~/.zshrc, ~/.zlogin, and then the Running state before proceeding to evaluate ~/.zlogout. The Bash Non-remote, Non-login, non-interactive workflow evaluates $BASH_ENV before proceeding to the Running state. The Bash non-remote, non-login, non-interactive state evaluates /etc/bash.bashrc, then ~/.bashrc, and finally proceeds to the Running state. The Bash non-remote, login, non-interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and evaluates $BASH_ENV before proceeding to the Running state and finally evaluating ~/.bash_logout. The Bash non-remote, login, interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and proceeds to the Running state before evaluating ~/.bash_logout. The Bash remote, non-login, non-interactive workflow evaluates /etc/bash.bashrc, then ~/.bashrc before proceeding to the Running state. The Bash remote, non-login, interactive workflow proceeds immediately to a label reading 'No path', and does not proceed further. The Bash Remote Login Non-Interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and evaluates $BASH_ENV before proceeding to the Running state and finally evaluating ~/.bash_logout. Where ~/.profile, ~/.bash_login and ~/.bash_profile are considered, the first two are represented by a trio of boxes arranged with the name of the file in one box, 'Found' and 'Not found' in the other box. Lines lead into the box naming the file, while lines lead out from the 'Found' or 'Not found' boxes to signify whether th file in question was found or not. The trio of boxes are bound tightly to each other, and both trios of boxes and the ~/.bash_profile are arranged in a common column, top to bottom, in the order they're considered. The same column is shared by the box trios found for similar logic sequences in each other workflow that needs to consider ~/.profile, ~/.bash_login and ~/.bash_profile. Files of the same (or sufficiently similar) name are placed in the same columns, with dotted lines connecting them. Every instance of /etc/zshenv is connected with a dotted line, as is every instance of ~/.zshenv, every instance of /etc/profile, ~/.bashrc, and so on." src="../../../../../assets/sh-zsh-bash-refactor/refactor-output/refactor-output.svg" /></p>
+<p>So, again, we're covering each of <code>sh</code>, <code>zsh</code> and <code>bash</code>, with every combination of shell, (non)remote, (non)login and (non)interactive, where the shell supports the distinction. (Only <code>bash</code> recognizes remote shells.)</p>
+<h3 id="swimlanes">Swimlanes<a class="headerlink" href="#swimlanes" title="Permanent link">&para;</a></h3>
+<p>The first thing to notice is the use of swimlanes.</p>
+<p><img alt="There is a single horizontal line drawn, with labels representing activities along it. The line is blueish-green and begins with Zsh Login Interactive, proceeds to /etc/zshenv, then to ~/.zshenv, ~/.zprofile, ~/.zshrc, ~/.zlogin, the Running state, and finally to ~/.zlogout." src="../../../../../assets/sh-zsh-bash-refactor/swimlane/swimlane.svg" /></p>
+<p>Instead of using a particular-colored line bouncing from file node to file node shared with other colored lines, we use a single swimlane to identify a single combination of session parameters. While this makes the chart decidedly less compact, it reduces a great deal of pressure on the layout engine, letting us do much more tweaking, and giving us the option of packing in more information without the output looking like a tangled mess of spaghetti.</p>
+<h4 id="swimlanes-origins-rationale">Swimlanes Origins / Rationale<a class="headerlink" href="#swimlanes-origins-rationale" title="Permanent link">&para;</a></h4>
+<p>The use of swimlanes came out of my earlier attempt to reformulate the chart as a truth table. This was before I discovered the special conditional relationships between ~/.profile, ~/.bash_login and ~/.bash_profile. Earlier still, I'd attempted to replace the nodes in the original chart with clusters where each workflow would stop off at a workflow-dedicated node in a cluster corresponding to the file being evaluated. If you're having a difficult time picturing that, don't worry; so did the layout engine&emdash;it gave me a bunch of spaghetti, in large part because it tries to route edges around clusters, rather than through them.</p>
+<h3 id="granular-same-rank-association">Granular Same-Rank Association<a class="headerlink" href="#granular-same-rank-association" title="Permanent link">&para;</a></h3>
+<p>The columnar behavior is in part because Graphviz thinks of this as a directed graph, but the placement of this or that in a given column comes from using the <code>rank=same</code> attribute in an anonymous subgraph. The syntax looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="na">rank</span><span class="p">=</span><span class="s">same</span>
+<span class="w">        </span><span class="nt">sh_nn</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Sh\nNon-Login\nNon-Interactive&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="nt">sh_ni</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Sh\nNon-Login\nInteractive&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="nt">sh_ln</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Sh\nLogin\nNon-Interactive&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="nt">sh_li</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Sh\nLogin\nInteractive&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>The above code results in all of the session-describing nodes in the same rank (and thus the same column, in this graph). In the following image, the above code is what builds the left-most column.</p>
+<p><img alt="There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane." src="../../../../../assets/sh-zsh-bash-refactor/samerank/samerank.svg" /></p>
+<p>If I remove the samerank behavior from all but the Running column, this is the result:</p>
+<p><img alt="There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The last point in each swimlane, Running, is lined up vertically. The first point in each swimlane contains the name of each swimlane, but is not lined up vertically." src="../../../../../assets/sh-zsh-bash-refactor/nonsamerank/nonsamerank.svg" /></p>
+<p>Note that all of the empty stretches in the swimlanes have collapsed, with everything moving as close to the Running column as its swimlane allows. That's obviously much less clear than having the swimlane labels lined up, with empty space where a swimlane doesn't have a function in common with any other swimlane.</p>
+<p>The other thing interesting about this approach is that while the above nodes will be in the same rank, we're not forcing them to be the <em>only</em> things in that rank.</p>
+<p>Let's return to the samerank behavior:</p>
+<p><img alt="There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane." src="../../../../../assets/sh-zsh-bash-refactor/samerank/samerank.svg" /></p>
+<p>Now let's add a a few new nodes and edges, and another samerank grouping. This is largely the same as the above image, but I've de-emphasized (by making them dashed lines) the swimlane edges, emphasized the samerank groupings (by adding visible lines where there weren't any, and making all lines thick and solid), and made the nodes part of each grouping a different shape and color.</p>
+<p><img alt="In the top half of the image, there are four rows. The first row has a single node labeled A. The second row has a node labeled A, with a dashed arrow leading to a black circle with the label B. The third row has a black circle with the label B directly beneath the second row's black circle with the label B, and has a dashed line leading to a node labeled C. The fourth row has a node labeled A with a dashed line leading to a black circle labeled B (directly beneath the other two black circles), which has a dashed line leading to a node labeled C, which as a dashed line leading to a node labeled D. There is a solid black line joining the three black circles. In the next four rows, there are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane. The first column's nodes are rectangles with a yellow background, and a thick yellow line joins them. The second column only has nodes in the final two swimlanes. The second column's nodes are reddish purple parallelograms labeled &quot;~/.profile&quot;, and have a thick reddish-purple line joining them. The third column has nodes on the second and forth swimlanes. The nodes for the third column are vermilion diamonds labeled &quot;$ENV&quot;. The fourth column's nodes are blue triangles, and there is a thick blue line joining them." src="../../../../../assets/sh-zsh-bash-refactor/samerankplus/samerankplus.svg" /></p>
+<p>The set of black nodes and edges are held in place with two constraints; the <code>A -&gt; B -&gt; C -&gt; D</code> row has as many ranks as the entire graph, so it extends end to end. The three black circles labeled "B" are held together via a <code>rank=same</code> directive, which is why the <code>B -&gt; C</code> line is in the middle of the graph, occupying neither the first or fourth ranks.</p>
+<p>Now, the set of nodes labeled "B" are interesting, because they occupy the same rank as the set of nodes labeled "~/.profile". Just because you set two different sets of nodes as <code>rank=same</code> doesn't mean each <em>set</em> of nodes they'll occupy the same rank, but it doesn't mean they'll occupy different ranks, either.</p>
+<p>This helps us avoid the use of <em>column</em> headers, since we're able to reuse the same column for multiple groups of data, so long as those groups aren't in the same swimlane.</p>
+<h4 id="ranksame-origins-rationale"><code>rank=same</code> Origins / Rationale<a class="headerlink" href="#ranksame-origins-rationale" title="Permanent link">&para;</a></h4>
+<p>I originally tried to use common nodes, and then clusters, to group common points in the different workflows, but I invariably wound up with spaghetti flows. When you use clusters, Graphviz will try to pull the nodes in a cluster into the smallest possible space, distorting the graph outside of the cluster. However, the anonymous subgraph using <code>rank=same</code> doesn't have that distorting effect; it only forces nodes into a given rank.</p>
+<p>The more I used constraining tools like clusters and edges with <code>[constraint=true]</code> (which is the default), the harder it became to avoid spaghetti. I felt like the Emperor; the tighter I gripped, the more slipped through my grasp. The more I relaxed, the easier it became.</p>
+<h3 id="eye-guiding-non-constraining-lines">Eye-Guiding, Non-Constraining Lines<a class="headerlink" href="#eye-guiding-non-constraining-lines" title="Permanent link">&para;</a></h3>
+<p>Look for the small vertical dotted lines in this subset of the larger graph:</p>
+<p><img alt="There are four swimlanes, all for Sh, one for Non-Login, Non-Interactive, one for Non-Login, Interactive, one for Login, Non-Interactive, and one for Login, Interactive. The contents are as in previous graphs. The first and last points in the swimlanes are lined up vertically. The first column contains the name of each swimlane." src="../../../../../assets/sh-zsh-bash-refactor/samerank/samerank.svg" /></p>
+<p>Each of these dotted lines are within a <code>rank=same</code> grouping, and they help draw your eye along that rank in order to identify the grouped elements. Since we group elements of the same or similar roles, that helps you identify those roles as groupings without being too distracting from the swimlanes.</p>
+<h4 id="eye-guide-origins-rationale">Eye-guide Origins / Rationale<a class="headerlink" href="#eye-guide-origins-rationale" title="Permanent link">&para;</a></h4>
+<p>Without the clear bounding boxes offered by clusters, I wanted a way to get visible groupings. Drawing non-constraining lines provided that. A dotted line is less distracting from the swimlanes than a solid line would be.</p>
+<h3 id="colors">Colors<a class="headerlink" href="#colors" title="Permanent link">&para;</a></h3>
+<p>Let's look at our chart without colors:</p>
+<p><img alt="A chart showing each of Sh, Zsh and Bash session setup and teardown workflows. Each shell variant covered includes each combination of non-login and login, non-interactive and interactive sessions. Bash further includes non-remote vs remote workflows. Non-login, non-interactive workflows are drawn in black. Non-login, interactive workflows are drawn in orange. Login, non-interactive workflows are drawn in sky blue. Login, interactive workflows are drawn in sea green. On the left is a column labeling the workflow by shell type and session type. On the right is a column containing the label 'Running...'. In between are columns with the occasional label identifying other files that may be consumed. The Sh non-login, non-interactive workflow proceeds directly to the Running state. The Sh non-login, interactive workflow evaluates $ENV, and then proceeds to the Running state. The Sh login, non-interactive state evaluates ~/.profile, then proceeds to the Running state. The Sh login, interactive state evaluates ~/.profile, then $ENV, and finally proceeds to the Running state. The Zsh non-login, non-interactive workflow evaluates /etc/zshenv, then ~/.zshenv, and then proceeds to the Running state. The Zsh non-login, interactive workflow evaluates ~/etc/zshenv, then ~/.zshenv, and finally ~/.zshrc before proceeding to the Running state. The Zsh login, non-interactive state evaluates ~/etc/zshenv, then ~/.zshenv, then ~/.zprofile, ~/.zlogin, then enters the Running state, and finally evaluates ~/.zlogout. The Zsh login, interactive workflow evaluates ~/.etc/zshenv, ~/.zshenv, ~/.zprofile, ~/.zshrc, ~/.zlogin, and then the Running state before proceeding to evaluate ~/.zlogout. The Bash Non-remote, Non-login, non-interactive workflow evaluates $BASH_ENV before proceeding to the Running state. The Bash non-remote, non-login, non-interactive state evaluates /etc/bash.bashrc, then ~/.bashrc, and finally proceeds to the Running state. The Bash non-remote, login, non-interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and evaluates $BASH_ENV before proceeding to the Running state and finally evaluating ~/.bash_logout. The Bash non-remote, login, interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and proceeds to the Running state before evaluating ~/.bash_logout. The Bash remote, non-login, non-interactive workflow evaluates /etc/bash.bashrc, then ~/.bashrc before proceeding to the Running state. The Bash remote, non-login, interactive workflow proceeds immediately to a label reading 'No path', and does not proceed further. The Bash Remote Login Non-Interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and evaluates $BASH_ENV before proceeding to the Running state and finally evaluating ~/.bash_logout. Where ~/.profile, ~/.bash_login and ~/.bash_profile are considered, the first two are represented by a trio of boxes arranged with the name of the file in one box, 'Found' and 'Not found' in the other box. Lines lead into the box naming the file, while lines lead out from the 'Found' or 'Not found' boxes to signify whether th file in question was found or not. The trio of boxes are bound tightly to each other, and both trios of boxes and the ~/.bash_profile are arranged in a common column, top to bottom, in the order they're considered. The same column is shared by the box trios found for similar logic sequences in each other workflow that needs to consider ~/.profile, ~/.bash_login and ~/.bash_profile. Files of the same (or sufficiently similar) name are placed in the same columns, with dotted lines connecting them. Every instance of /etc/zshenv is connected with a dotted line, as is every instance of ~/.zshenv, every instance of /etc/profile, ~/.bashrc, and so on." src="../../../../../assets/sh-zsh-bash-refactor/refactor-output-bw/refactor-output-bw.svg" /></p>
+<p>It's...readable, but not easily. Try reading the Sh, Non-Login, Non-Interactive line. Your eye may well jump lanes down to the interactive swimlane below as you try to trace the line. That's not great. While the graph is still clear and accurate, some color for <em>contrast</em> would be useful. To help with that, I used four distinct colors for the chart, one per swimlane:</p>
+<p><img alt="A chart showing each of Sh, Zsh and Bash session setup and teardown workflows. Each shell variant covered includes each combination of non-login and login, non-interactive and interactive sessions. Bash further includes non-remote vs remote workflows. Non-login, non-interactive workflows are drawn in black. Non-login, interactive workflows are drawn in orange. Login, non-interactive workflows are drawn in sky blue. Login, interactive workflows are drawn in sea green. On the left is a column labeling the workflow by shell type and session type. On the right is a column containing the label 'Running...'. In between are columns with the occasional label identifying other files that may be consumed. The Sh non-login, non-interactive workflow proceeds directly to the Running state. The Sh non-login, interactive workflow evaluates $ENV, and then proceeds to the Running state. The Sh login, non-interactive state evaluates ~/.profile, then proceeds to the Running state. The Sh login, interactive state evaluates ~/.profile, then $ENV, and finally proceeds to the Running state. The Zsh non-login, non-interactive workflow evaluates /etc/zshenv, then ~/.zshenv, and then proceeds to the Running state. The Zsh non-login, interactive workflow evaluates ~/etc/zshenv, then ~/.zshenv, and finally ~/.zshrc before proceeding to the Running state. The Zsh login, non-interactive state evaluates ~/etc/zshenv, then ~/.zshenv, then ~/.zprofile, ~/.zlogin, then enters the Running state, and finally evaluates ~/.zlogout. The Zsh login, interactive workflow evaluates ~/.etc/zshenv, ~/.zshenv, ~/.zprofile, ~/.zshrc, ~/.zlogin, and then the Running state before proceeding to evaluate ~/.zlogout. The Bash Non-remote, Non-login, non-interactive workflow evaluates $BASH_ENV before proceeding to the Running state. The Bash non-remote, non-login, non-interactive state evaluates /etc/bash.bashrc, then ~/.bashrc, and finally proceeds to the Running state. The Bash non-remote, login, non-interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and evaluates $BASH_ENV before proceeding to the Running state and finally evaluating ~/.bash_logout. The Bash non-remote, login, interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and proceeds to the Running state before evaluating ~/.bash_logout. The Bash remote, non-login, non-interactive workflow evaluates /etc/bash.bashrc, then ~/.bashrc before proceeding to the Running state. The Bash remote, non-login, interactive workflow proceeds immediately to a label reading 'No path', and does not proceed further. The Bash Remote Login Non-Interactive workflow evaluates /etc/profile. It then attempts to evaluate each of ~/.profile, ~/.bash_login and ~/.bash_profile. If it finds one, it skips the rest and evaluates $BASH_ENV before proceeding to the Running state and finally evaluating ~/.bash_logout. Where ~/.profile, ~/.bash_login and ~/.bash_profile are considered, the first two are represented by a trio of boxes arranged with the name of the file in one box, 'Found' and 'Not found' in the other box. Lines lead into the box naming the file, while lines lead out from the 'Found' or 'Not found' boxes to signify whether th file in question was found or not. The trio of boxes are bound tightly to each other, and both trios of boxes and the ~/.bash_profile are arranged in a common column, top to bottom, in the order they're considered. The same column is shared by the box trios found for similar logic sequences in each other workflow that needs to consider ~/.profile, ~/.bash_login and ~/.bash_profile. Files of the same (or sufficiently similar) name are placed in the same columns, with dotted lines connecting them. Every instance of /etc/zshenv is connected with a dotted line, as is every instance of ~/.zshenv, every instance of /etc/profile, ~/.bashrc, and so on." src="../../../../../assets/sh-zsh-bash-refactor/refactor-output/refactor-output.svg" /></p>
+<p>Each color is keyed off of whether or not a swimlane corresponds to a login session, and whether or not a swimlane corresponds to an interactive session. The four colors are drawn from a <a href="http://jfly.iam.u-tokyo.ac.jp/color/#pallet">colorblind-safe palette</a>.</p>
+<h4 id="colors-origins-rationale">Colors Origins / Rationale<a class="headerlink" href="#colors-origins-rationale" title="Permanent link">&para;</a></h4>
+<p>I'm not fond of using color for encoding information without an alternate way to present that same information; colorblindness is a real thing, and keying information off of color can make the chart more difficult to read. The chart that inspired this one relied on color as the sole way of distinguishing program flow, and was difficult to follow, as a result.</p>
+<p>Colors should be used for accenting and supplementing information, not as a primary differentiator; this is called <a href="http://jfly.iam.u-tokyo.ac.jp/color/#redundant1">redundant coding</a>. (Instead of using different shapes, I use spacial separation of swimlanes and clear labels for my primary indicators. That said, the black-and-white version might be able to take advantage of more mechanisms. I'm pleased enough with the colorblind-safe palette, though.)</p>
+<p><a href="http://jfly.iam.u-tokyo.ac.jp/color/">Here is a very good resource</a> for considering how to present data with consideration of colorblindness. It also contains the palette of colors I drew from for this chart.</p>
+<h3 id="html-like-labels-for-choices">HTML-like labels for Choices<a class="headerlink" href="#html-like-labels-for-choices" title="Permanent link">&para;</a></h3>
+<p>The original chart had choices presented in it, but it wasn't clear that that's what they were unless you read the supporting text. Here, we use HTML-like labels in order to use tables to get us nodes with multiple inputs and outputs. This lets us label a path without using edge labels.</p>
+<p><img alt="A single swimlane is shown, for Bash non-remote, login, interactive. The flow proceeds from the label to /etc/profile. From there, to ~/.profile. If ~/.profile is found, flow proceeds to the Running state and then to ~/.bash_logout. If ~/.profile is not found, flow proceeds to ~/.bash_login. If ~/.bash_login is found, flow proceeds to the Running state and then to ~/.bash_logout. If ~/.bash_login is not found, flow proceeds to ~/.bash_profile, then to the Running state and finally to ~/.bash_logout. ~/.profile and ~/.bash_login are represented by boxes with three cells. Flow passes into the box at the cell labeled after the file in question. Flow leaves the box through cells labeled &quot;Found&quot; and &quot;Not found&quot;, with lines drawn to wherever flow moves next." src="../../../../../assets/sh-zsh-bash-refactor/choices-swimlane/choices-swimlane.svg" /></p>
+<p>Notice the boxes for <code>~/.profile</code> and <code>~/.bash_login</code>. See how flow passes into the box at the cell labeled after the file in question, and flow leaves the box through cells labeled "Found" and "Not found", with lines drawn to wherever flow moves next. These are HTML-like labels, specifically taking advantage of tables and <em>ports</em>. The Dot language doesn't actually implement HTML, nor does it fully implement HTML tables. It does, however, <em>extend</em> tables with ports; you can add a <code>port="some_string"</code> attribute to a <code>td</code> element in an HTML-like label, and then address that specific <em>port</em> when drawing edges, using syntax like <code>node1:my_port -&gt; node2:my_other_port</code>, or even <code>node1:port1 -&gt; node1:port2</code></p>
+<p>Here's the source code for the above swimlane. See if you can identify where the ports are created, and where they're used in the edges.</p>
+<div class="highlight"><pre><span></span><code><span class="k">digraph</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">node</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;\N&quot;</span><span class="w"> </span><span class="na">shape</span><span class="p">=</span><span class="s">none</span><span class="p">]</span>
+<span class="w">    </span><span class="k">edge</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s">dotted</span><span class="w"> </span><span class="na">constraint</span><span class="p">=</span><span class="s">false</span><span class="w"> </span><span class="na">dir</span><span class="p">=</span><span class="s">none</span><span class="p">]</span>
+<span class="w">    </span><span class="na">rankdir</span><span class="p">=</span><span class="s">LR</span>
+
+<span class="w">    </span><span class="nt">bash_nli</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Bash\nNon-Remote\nLogin\nInteractive&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">bash_nli_etc_profile</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;/etc/profile&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">bash_nli_home_bash_login_case</span><span class="w">  </span><span class="p">[</span><span class="na">label</span><span class="p">=&lt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">table</span><span class="w"> </span><span class="nt">border=&#39;0&#39;</span><span class="w"> </span><span class="nt">cellborder=&#39;1&#39;</span><span class="w"> </span><span class="nt">cellspacing=&#39;0&#39;</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="w"> </span><span class="nt">rowspan=&#39;2&#39;</span><span class="w"> </span><span class="nt">port=&#39;in&#39;</span><span class="p">&gt;</span><span class="nt">~/.bash_login</span><span class="p">&lt;</span><span class="nt">/td</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="w"> </span><span class="nt">port=&#39;found&#39;</span><span class="p">&gt;</span><span class="nt">Found</span><span class="p">&lt;</span><span class="nt">/td</span><span class="p">&gt;&lt;</span><span class="nt">/tr</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="w"> </span><span class="nt">port=&#39;not_found&#39;</span><span class="p">&gt;</span><span class="nt">Not</span><span class="w"> </span><span class="nt">found</span><span class="p">&lt;</span><span class="nt">/td</span><span class="p">&gt;&lt;</span><span class="nt">/tr</span><span class="p">&gt;&lt;</span><span class="nt">/table</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="na">shape</span><span class="p">=</span><span class="s">none</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">bash_nli_home_bash_profile</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;~/.bash_profile&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">bash_nli_running_to_logout</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Running...&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">bash_nli_logout</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;~/.bash_logout&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">bash_nli_home_profile_case</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=&lt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">table</span><span class="w"> </span><span class="nt">border=&#39;0&#39;</span><span class="w"> </span><span class="nt">cellborder=&#39;1&#39;</span><span class="w"> </span><span class="nt">cellspacing=&#39;0&#39;</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="w"> </span><span class="nt">rowspan=&#39;2&#39;</span><span class="w"> </span><span class="nt">port=&#39;in&#39;</span><span class="p">&gt;</span><span class="nt">~/.profile</span><span class="p">&lt;</span><span class="nt">/td</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="w"> </span><span class="nt">port=&#39;found&#39;</span><span class="p">&gt;</span><span class="nt">Found</span><span class="p">&lt;</span><span class="nt">/td</span><span class="p">&gt;&lt;</span><span class="nt">/tr</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="w"> </span><span class="nt">port=&#39;not_found&#39;</span><span class="p">&gt;</span><span class="nt">Not</span><span class="w"> </span><span class="nt">found</span><span class="p">&lt;</span><span class="nt">/td</span><span class="p">&gt;&lt;</span><span class="nt">/tr</span><span class="p">&gt;&lt;</span><span class="nt">/table</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="na">shape</span><span class="p">=</span><span class="s">none</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k">edge</span><span class="w"> </span><span class="p">[</span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009e73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">5</span><span class="w"> </span><span class="na">constraint</span><span class="p">=</span><span class="s">true</span><span class="w"> </span><span class="na">style</span><span class="p">=</span><span class="s">solid</span><span class="w"> </span><span class="na">dir</span><span class="p">=</span><span class="s">forward</span><span class="p">]</span>
+
+<span class="w">    </span><span class="nt">bash_nli</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_etc_profile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_home_profile_case</span><span class="p">:</span><span class="nt">in</span>
+<span class="w">    </span><span class="nt">bash_nli_home_bash_login_case</span><span class="p">:</span><span class="nt">found</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_running_to_logout</span>
+<span class="w">    </span><span class="nt">bash_nli_home_bash_login_case</span><span class="p">:</span><span class="nt">not_found</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_home_bash_profile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_running_to_logout</span>
+<span class="w">    </span><span class="nt">bash_nli_home_profile_case</span><span class="p">:</span><span class="nt">found</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_running_to_logout</span>
+<span class="w">    </span><span class="nt">bash_nli_home_profile_case</span><span class="p">:</span><span class="nt">not_found</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_home_bash_login_case</span><span class="p">:</span><span class="nt">in</span>
+<span class="w">    </span><span class="nt">bash_nli_running_to_logout</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_nli_logout</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="html-like-labels-for-choices-origins-rationale">HTML-like labels for Choices Origins / Rationale<a class="headerlink" href="#html-like-labels-for-choices-origins-rationale" title="Permanent link">&para;</a></h3>
+<p>I'd actually completed the chart using a very different style before I realized I was missing the choices, and rewrote the chart to identify the decision points. To label the decision points, I tried using cluster, nodes as labels, nodes-as-labels with some deliberate coalescing of shortcut paths...I even tried using edge labels. I couldn't make the chart come out clean. Finally, I tried using HTML labels with ports, and it gave me a result compact enough to make a chart that <em>worked</em> and didn't have edge spaghetti everywhere.</p>
+<p>The big advantage to using HTML-like labels and tables, in this case, is that the layout engine treats the entire label as a single node, for the purpose of placing nodes. That makes ranking much easier to manage, as a single piece of information doesn't have to spread across multiple ranks; I had tried using both <code>rank=same</code> and clusters to contain <em>that</em> problem, and I simply wound up with more edge spaghetti as the layout engine either chose strange circumlocutious paths for edges, or tried running edges around clusters in ways that made edges difficult to distinguish from each other. Ultimately, being able to pack all of that information cleanly into the boundary of a single node let me build a much cleaner graph.</p>
+<h3 id="same-rank-constraining-edges">Same-rank, Constraining Edges<a class="headerlink" href="#same-rank-constraining-edges" title="Permanent link">&para;</a></h3>
+<p>Notice how there's a very definite sequence to the ordering of the swimlanes?</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Shell</th>
+<th style="text-align: center;">Remote</th>
+<th style="text-align: center;">Login</th>
+<th style="text-align: center;">Interactive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Sh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Sh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Sh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Sh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Zsh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Zsh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Zsh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Zsh</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: right;">Bash</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+<p>That sequence was maintained by using a constraining edge on each of the <code>Running...</code> nodes:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="na">rank</span><span class="p">=</span><span class="s">same</span>
+<span class="w">        </span><span class="k">edge</span><span class="w"> </span><span class="p">[</span><span class="na">constraint</span><span class="p">=</span><span class="s">true</span><span class="p">]</span>
+<span class="w">        </span><span class="k">node</span><span class="w"> </span><span class="p">[</span><span class="na">label</span><span class="p">=</span><span class="s2">&quot;Running...&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="nt">sh_nn_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">sh_ni_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">sh_ln_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">sh_li_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">zsh_nn_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">zsh_ni_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">zsh_ln_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">zsh_li_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_nnn_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_nni_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_nln_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_nli_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_rnn_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_rln_running</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">        </span><span class="nt">bash_rli_running</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>This told the layout engine that there was a deliberate ordering there, and the layout engine sought to maintain it. Here's what the graph looks like without that constraining edge:</p>
+<p><img alt="As with the original refactored chart, except instead of the sequence of swimlanes running Sh-&gt;Zsh-&gt;Bash, nn-&gt;ni-&gt;ln-&gt;li, it goes zsh_nn-&gt;zsh_ln-&gt;zsh_li-&gt;zsh_ni, sh_ni-&gt;sh_li-&gt;bash_rnn-&gt;bash-&gt;rni-&gt;bash_rln-&gt;bash_nni-&gt;bash_rli-&gt;bash_nli-&gt;bash_nln-&gt;bash_nnn-&gt;sh_ln-&gt;sh_nn." src="../../../../../assets/sh-zsh-bash-refactor/refactor-output-no-running-constraint/refactor-output-no-running-constraint.svg" /></p>
+<p>Note that Zsh floated to the top, and the Sh swimlanes are split to both before and after the Bash swimlanes. You can even see how some of the dotted lines are no longer simply vertical; they have to jump over other nodes in the same rank in order to reach the rest of their group. There's a reason it's ordered like that, but I don't understand it well enough to tell you how to predict it.</p>
+<p><em>There is one other</em> constraining samerank edge in the graph, though:</p>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="k">edge</span><span class="w"> </span><span class="p">[</span><span class="na">constraint</span><span class="p">=</span><span class="s">true</span><span class="w"> </span><span class="na">style</span><span class="p">=</span><span class="s">invis</span><span class="p">]</span>
+<span class="w">        </span><span class="nt">bash_rnn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_rni</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">bash_rln</span>
+</code></pre></div>
+<p>If you look at the swimlane for Bash/Remote/Non-Login/Interactive, you'll notice is't quite short. In fact, it goes straight to "No path", and doesn't reach the Running state. Since the Running state is where we're applying all of our samerank edge constraints, this particular swimlane doesn't get picked up by it. So we anchor it to its neighbors (Bash/Remote/Non-Login/Non-Interactive and Bash/Remote/Login/Non-Interactive) in order to control its vertical placement. If we didn't, it would float to the top of the chart, and would be nowhere near the rest of the Bash swimlanes!</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/mikemol" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/mikemol" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "content.code.annotate", "toc.integrate"], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

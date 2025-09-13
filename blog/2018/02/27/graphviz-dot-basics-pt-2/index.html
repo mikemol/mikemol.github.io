@@ -1,0 +1,650 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mike Mol's blog. Discussing why's, how's and random technical musings.">
+      
+      
+        <meta name="author" content="Mike Mol">
+      
+      
+        <link rel="canonical" href="https://mikemol.github.io/blog/2018/02/27/graphviz-dot-basics-pt-2/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs - Mike's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","UA-112008517-1"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","UA-112008517-1",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=UA-112008517-1",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#circo-layout-engine" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Mike&#39;s Notes" class="md-header__button md-logo" aria-label="Mike's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mike's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mikemol/mikemol.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mikemol/mikemol.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Blog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Mike&#39;s Notes" class="md-nav__button md-logo" aria-label="Mike's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mike's Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mikemol/mikemol.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mikemol/mikemol.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Dot Language Basics Pt 2: Layout Engines, Clusters and Complicated Undirected Graphs</h1>
+
+<p>So, we covered simple, undirected graphs. Let's look at a couple more complicated cases, one with clustering and one without, so we can explore layout engines.</p>
+<div class="highlight"><pre><span></span><code><span class="k">graph</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">A</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#F0E442&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#E69F00&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">B</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#F0E442&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009E73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">C</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#F0E442&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#CC79A7&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">D</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#56B4E9&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#E69F00&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">E</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#56B4E9&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009E73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">F</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#56B4E9&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#CC79A7&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">G</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#D55E00&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#E69F00&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">H</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#D55E00&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009E73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">I</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#D55E00&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#CC79A7&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+
+<span class="w">    </span><span class="nt">A</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">B</span>
+<span class="w">    </span><span class="nt">B</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">C</span>
+<span class="w">    </span><span class="nt">C</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">A</span>
+
+<span class="w">    </span><span class="nt">D</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">E</span>
+<span class="w">    </span><span class="nt">E</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">F</span>
+<span class="w">    </span><span class="nt">F</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">D</span>
+
+<span class="w">    </span><span class="nt">G</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">H</span>
+<span class="w">    </span><span class="nt">H</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">I</span>
+<span class="w">    </span><span class="nt">I</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">G</span>
+
+<span class="w">    </span><span class="nt">A</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">D</span>
+<span class="w">    </span><span class="nt">B</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">G</span>
+<span class="w">    </span><span class="nt">H</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">E</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Remember, this is a <em>cyclic</em> graph; within the graph, there exist two nodes which have more than one path to reach each other. In fact, it's pretty easy to identify three cyclic <em>subgraphs</em> within the larger graph; <code>A-B-C</code>, <code>D-E-F</code> and <code>G-H-I</code>, and these smaller subgraphs are connected to each other. For visualizations' sake, I've added color information to each node, so the nodes will be easier to identify. Since we're dealing with three sets of three nodes, I've color-coded each node based on both which grouping it's part of, and which member of which grouping it is.</p>
+<p>Now let's consider how we might draw attention to those subgraphs in the Dot language, by wrapping them up with clusters:</p>
+<div class="highlight"><pre><span></span><code><span class="k">graph</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">A</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#F0E442&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#E69F00&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">B</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#F0E442&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009E73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">C</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#F0E442&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#CC79A7&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">D</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#56B4E9&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#E69F00&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">E</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#56B4E9&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009E73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">F</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#56B4E9&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#CC79A7&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">G</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#D55E00&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#E69F00&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">H</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#D55E00&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#009E73&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">I</span><span class="w"> </span><span class="p">[</span><span class="na">style</span><span class="p">=</span><span class="s2">&quot;filled&quot;</span><span class="w"> </span><span class="na">fillcolor</span><span class="p">=</span><span class="s2">&quot;#D55E00&quot;</span><span class="w"> </span><span class="na">color</span><span class="p">=</span><span class="s2">&quot;#CC79A7&quot;</span><span class="w"> </span><span class="na">penwidth</span><span class="p">=</span><span class="m">8</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k">subgraph</span><span class="w"> </span><span class="nt">clusterA</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">A</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">B</span>
+<span class="w">        </span><span class="nt">B</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">C</span>
+<span class="w">        </span><span class="nt">C</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">A</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">subgraph</span><span class="w"> </span><span class="nt">clusterB</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">D</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">E</span>
+<span class="w">        </span><span class="nt">E</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">F</span>
+<span class="w">        </span><span class="nt">F</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">D</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">subgraph</span><span class="w"> </span><span class="nt">clusterC</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">G</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">H</span>
+<span class="w">        </span><span class="nt">H</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">I</span>
+<span class="w">        </span><span class="nt">I</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">G</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nt">A</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">D</span>
+<span class="w">    </span><span class="nt">B</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">G</span>
+<span class="w">    </span><span class="nt">H</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nt">E</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's see how Graphviz handles these two very similar graphs, using the default <code>dot</code> layout engine:</p>
+<table>
+<thead>
+<tr>
+<th>Clustered</th>
+<th>Non-clustered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own rectangle, and the nodes within each rectangle are arranged in order, from top to bottom. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle, and the D-E-F cluster is in the bottom-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-clustered/complicated-undirected-graph-clustered.svg" /></td>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. A is at the top of the overall graph, with B and C nearby. G, H and I are near the middle of the graph, and D, E and F are near the bottom of the graph." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph/complicated-undirected-graph.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>Notice how in both the clustered and non-clustered cases, <code>A-B-C</code> is near the top of the graph, <code>D-E-F</code> is near the bottom, and <code>G-H-I</code> is near the middle of the graph. However, in the clustered case, each of the three groups are much more compact.</p>
+<p>Let's look at some other layout engines.</p>
+<h3 id="circo-layout-engine"><code>circo</code> Layout Engine<a class="headerlink" href="#circo-layout-engine" title="Permanent link">&para;</a></h3>
+<p>The <code>man</code> page description for <code>circo</code> is quite a mouthful, and reads:</p>
+<blockquote>
+<p><code>circo</code> draws graphs using a circular layout (see <a href="https://scholar.google.com/scholar?cluster=9494396738495206724&amp;hl=en&amp;as_sdt=0,23">Six and  Tollis,  GD  '99  and ALENEX  '99</a>, and <a href="https://scholar.google.com/scholar?cluster=278384429215122705&amp;hl=en&amp;as_sdt=0,23">Kaufmann and Wiese, GD '02</a>. The tool identifies biconnected components and draws the nodes of the component on a  circle. The  block‐cut‐ point tree is then laid out using a recursive radial algorithm. Edge crossings within a circle are minimized by placing as many edges on the circle's perimeter as possible. In particular, if the component is outerplanar, the component will have a planar layout.</p>
+<p>If a node belongs to multiple non‐trivial biconnected components, the layout puts the node in one of them. By default, this is the first non‐trivial component found in the search from the root component.</p>
+</blockquote>
+<p>Here's what that means in practice for these graphs:</p>
+<table>
+<thead>
+<tr>
+<th>Clustered</th>
+<th>Non-clustered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. The three small, cyclic graphs are distributed around a circle, with all nodes the same distance from the center of the circle." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-clustered-circo/complicated-undirected-graph-clustered-circo.svg" /></td>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. The three small, cyclic graphs are distributed around a circle, with all nodes the same distance from the center of the circle." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-circo/complicated-undirected-graph-circo.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>The first thing you'll notice is that both renders look identical; the <code>cluster</code> keyword is not part of the Dot language itself, and so whether or not it does anything depends on the layout engine.</p>
+<p>You can see the circle, and if you look, you can find the small subgraphs, but they're not obvious. Notice <code>circo</code> did not choose to place the <code>A</code> node next to the <code>D</code> node, even though that would have resulted in shorter edges and a cleaner result. When Graphviz does that sort of thing, it usually means that placement of nodes is somehow dependent on the listing order of the nodes in the source file itself, and you can usually get the result you're looking for by reordering the content in the source file.</p>
+<h3 id="fdp-layout-engine"><code>fdp</code> Layout Engine<a class="headerlink" href="#fdp-layout-engine" title="Permanent link">&para;</a></h3>
+<p>The <code>man</code> page description for <code>fdp</code> is brief:</p>
+<blockquote>
+<p><code>fdp</code> draws undirected graphs using a ``spring'' model. It relies  on  a  force‐directed  approach  in  the  spirit of Fruchterman and Reingold (cf. <a href="https://scholar.google.com/scholar?cluster=15659702693092844398&amp;hl=en&amp;as_sdt=0,23">Software‐Practice &amp; Experience 21(11), 1991, pp. 1129‐1164</a>).</p>
+</blockquote>
+<p>Here's what that means for these graphs:</p>
+<table>
+<thead>
+<tr>
+<th>Clustered</th>
+<th>Non-clustered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Each small cyclic graph is within its own box. The A-B-C cluster is at the top left, the G-H-I cluster is in the middle at the bottom, and the D-E-F cluster is in the top-right. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-clustered-fdp/complicated-undirected-graph-clustered-fdp.svg" /></td>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. The D-E-F cluster is near the top, while the A-B-C and G-H-I clusters overlap each other at the bottom." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-fdp/complicated-undirected-graph-fdp.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>The clustered version of this graph looks very fine in <code>fdp</code>; the graph isn't quite as compact as it could be, but the clusters, at least, highlight the structure of the graph, and are themselves close to each other. The non-clustered version of this graph, however, has no obvious structure; the <code>A-B-C</code> triad overlaps the <code>G-H-I</code> triad, and looks like a mess.</p>
+<h3 id="neato-layout-engine"><code>neato</code> Layout Engine<a class="headerlink" href="#neato-layout-engine" title="Permanent link">&para;</a></h3>
+<p>The <code>man</code> page description for <code>neato</code> is also brief:</p>
+<blockquote>
+<p><code>neato</code>  draws  undirected graphs using ``spring'' models (see <a href="https://scholar.google.com/scholar?cluster=3559379059294964525&amp;hl=en&amp;as_sdt=0,23">Kamada and Kawai, Information Processing Letters 31:1, April 1989</a>).</p>
+</blockquote>
+<p>This doesn't tell you much, but the results speak for themselves:</p>
+<table>
+<thead>
+<tr>
+<th>Clustered</th>
+<th>Non-clustered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. D-E-F is at the top of the graph, A-B-C is at the lower-left, and G-H-I is at the lower right. D-E-F has its D node to the left, while A-B-C has its A node at the top, resulting in only a short distance for the A-D edge. D-E-F has its E node to the right, while G-H-I has its H node at the top, leading to a similarly short edge for E-H. A-B-C has its B node to the right, while G-H-I has its G node to the left, leading to a short B-G edge as well." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-clustered-neato/complicated-undirected-graph-clustered-neato.svg" /></td>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. D-E-F is at the top of the graph, A-B-C is at the lower-left, and G-H-I is at the lower right. D-E-F has its D node to the left, while A-B-C has its A node at the top, resulting in only a short distance for the A-D edge. D-E-F has its E node to the right, while G-H-I has its H node at the top, leading to a similarly short edge for E-H. A-B-C has its B node to the right, while G-H-I has its G node to the left, leading to a short B-G edge as well." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-neato/complicated-undirected-graph-neato.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>The first thing you should notice: There's no difference between the clustered and non-clustered versions. Just the same, you can <em>very</em> clearly see all three cyclic subgraphs, they're well-spaced from each other, and their interconnections are very clear. The <code>neato</code> layout engine is very well-suited to this graph, clusters or no.</p>
+<h3 id="patchwork-layout-engine"><code>patchwork</code> Layout Engine<a class="headerlink" href="#patchwork-layout-engine" title="Permanent link">&para;</a></h3>
+<p>The <code>man</code> page description for <code>patchwork</code> describes something different:</p>
+<blockquote>
+<p>patchwork draws the graph as a squarified  treemap  (see  <a href="https://scholar.google.com/scholar?cluster=16156845309181182620&amp;hl=en&amp;as_sdt=0,23">M.  Bruls  et  al., "Squarified treemaps", Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization, 2000, pp. 33-42</a>). The clusters of the graph are used to  specify  the tree.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Clustered</th>
+<th>Non-clustered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="A grid is presented. The grid is three rows tall, the first row contains A, B, D, E, the second row contains C (spanning beneath A and B) and F (spanning beneath D and E), and the third row contains G, H and I. No edges are presented." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-clustered-patchwork/complicated-undirected-graph-clustered-patchwork.svg" /></td>
+<td><img alt="A single 3x3 grid is presented. The nodes A, B and C occupy the first row. The nodes D, F and H occupy the second row. The nodes E, G and I occupy the third row. No edges are presented." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-patchwork/complicated-undirected-graph-patchwork.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>All edge information appears to have been lost in this render. That said, compare the clustered and non-clustered versions. In the clustered version, you can clearly see <code>A-B-C</code> grouped, <code>D-E-F</code> grouped, and <code>G-H-I</code> grouped. This behavior is called <a href="https://en.wikipedia.org/wiki/Treemapping">treemapping</a>.</p>
+<h3 id="twopi-layout-engine"><code>twopi</code> Layout Engine<a class="headerlink" href="#twopi-layout-engine" title="Permanent link">&para;</a></h3>
+<p>The <code>man</code> page description for <code>twopi</code> describes it as:</p>
+<blockquote>
+<p>twopi draws graphs using a radial layout (see <a href="https://scholar.google.com/scholar?cluster=13431559378469939199&amp;hl=en&amp;as_sdt=0,23">G.  Wills,  Symposium  on  Graph Drawing  GD'97, September, 1997</a>).  Basically, one node is chosen as the center and put at the origin.  The remaining nodes are placed on a sequence  of  con centric  circles  centered about the origin, each a fixed radial distance from the previous circle.  All nodes distance 1 from the center are placed  on  the first  circle; all nodes distance 1 from a node on the first circle are placed on the second circle; and so forth.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Clustered</th>
+<th>Non-clustered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. G-H-I is near the top of the graph, A-B-C near the middle, and D-E-F is near the bottom-left. B--G and A--D are short edges connecting their two subgraphs, but E--H spans more or less from the top right through the center to the bottom left." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-clustered-twopi/complicated-undirected-graph-clustered-twopi.svg" /></td>
+<td><img alt="There are three groupings of nodes making up small, cyclic graphs, A-B-C, D-E-F and G-H-I. Connecting these smaller cyclic graphs are are a small set of lines, A--D, B--G and H--E. G-H-I is near the top of the graph, A-B-C near the middle, and D-E-F is near the bottom-left. B--G and A--D are short edges connecting their two subgraphs, but E--H spans more or less from the top right through the center to the bottom left." src="../../../../../assets/graphviz-dot-basics/complicated-undirected-graph-twopi/complicated-undirected-graph-twopi.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>Unfortunately, this doesn't work well for this graph. If I had to guess, I'd suspect it's largely because the structure of the graph has symmetry; the layout engine is having a hard time finding a node that's meaningful. There are ways we could help it; you can <a href="https://www.graphviz.org/doc/info/attrs.html#d:root">specify the center node</a>, for example, and you can create <a href="https://www.graphviz.org/doc/info/attrs.html#d:style">invisible</a> nodes and edges. Invisible nodes and edges are quite useful on their own, and we'll cover those in another post.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/mikemol" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/mikemol" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "content.code.annotate", "toc.integrate"], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

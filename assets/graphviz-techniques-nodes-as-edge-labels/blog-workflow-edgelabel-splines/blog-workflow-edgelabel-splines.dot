@@ -1,0 +1,37 @@
+digraph blog_workflow {
+	node [label="\N"];
+	vscode	 [label="Visual Studio Code"];
+	git_local	 [label="Local git repo"];
+	vscode -> git_local	 [label="Primary interface for"];
+	vscode -> git_local	 [label="For writing to"];
+	gv_preview	 [label=Dot];
+	vscode -> gv_preview	 [label=Previews];
+	md_preview	 [label=Markdown];
+	vscode -> md_preview	 [label=Previews];
+	Content -> vscode	 [label="Authored in"];
+	jekyll_local	 [label="Jekyll\n(locally-run)"];
+	git_local -> jekyll_local	 [label="Read from for"];
+	gv_render	 [label=GraphViz];
+	git_local -> gv_render	 [label="Read from for"];
+	git_github	 [label="GitHub git repo"];
+	git_local -> git_github	 [label="Pushes to"];
+	gv_render -> PNG	 [constraint=no,
+		label="Renders Dot to"];
+	gv_render -> SVG	 [constraint=no,
+		label="Renders Dot to"];
+	jekyll_gh	 [label="Jekyll\n(on GitHub Pages)"];
+	git_github -> jekyll_gh	 [label=Feeds];
+	ga	 [label="Google Analytics"];
+	jekyll_gh -> ga	 [label=Integrates];
+	jekyll_gh -> RSS	 [label=Generates];
+	RSS -> IFTTT	 [label="Monitored by"];
+	PNG -> git_local	 [label="For writing to"];
+	SVG -> git_local	 [label="For writing to"];
+	IFTTT -> Twitter	 [label="Post to"];
+	IFTTT -> Facebook	 [label="Post to"];
+	IFTTT -> Reddit	 [label="Post to"];
+	IFTTT -> LinkedIn	 [label="Post to"];
+	IFTTT -> Buffer	 [label="Adds to"];
+	gplus	 [label="Google Plus"];
+	Buffer -> gplus	 [label="Posts to"];
+}

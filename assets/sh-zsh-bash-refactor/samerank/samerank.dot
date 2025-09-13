@@ -1,0 +1,47 @@
+digraph {
+    node [label="\N" shape=none]
+    edge [style=dotted constraint=false dir=none]
+    rankdir=LR
+    {
+        rank=same
+        sh_nn [label="Sh\nNon-Login\nNon-Interactive"]
+        sh_ni [label="Sh\nNon-Login\nInteractive"]
+        sh_ln [label="Sh\nLogin\nNon-Interactive"]
+        sh_li [label="Sh\nLogin\nInteractive"]
+    }
+    {
+        rank=same
+        edge [constraint=true]
+        node [label="Running..."]
+        sh_nn_running ->
+        sh_ni_running ->
+        sh_ln_running ->
+        sh_li_running
+    }
+    {
+        rank=same
+        node [label="$ENV"]
+        sh_ni_env ->
+        sh_li_env
+    }
+    {
+        rank=same
+        node [label="~/.profile"]
+        sh_ln_home_profile ->
+        sh_li_home_profile
+    }
+
+    edge [penwidth=5 constraint=true style=solid dir=forward]
+
+    edge [color="black"]
+    sh_nn -> sh_nn_running
+
+    edge [color="orange"]
+    sh_ni -> sh_ni_env -> sh_ni_running
+    
+    edge [color="#35b4e9"]
+    sh_ln -> sh_ln_home_profile -> sh_ln_running
+
+    edge [color="#009e73"]
+    sh_li -> sh_li_home_profile -> sh_li_env -> sh_li_running
+}

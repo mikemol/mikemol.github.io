@@ -1,0 +1,32 @@
+digraph {
+    node [label="\N" shape=none]
+    edge [style=dotted constraint=false dir=none]
+    rankdir=LR
+
+    zsh_li [label="Zsh\nLogin\nInteractive"]
+
+    node [label="~/.zlogin"]
+    zsh_li_home_zlogin
+
+    node [label="~/.zshrc"]
+    zsh_li_home_zshrc
+
+    node [label="Running..."]
+    zsh_li_running_to_logout
+
+    node [label="~/.zlogout"]
+    zsh_li_home_zlogout
+
+    node [label="~/.zprofile"]
+    zsh_li_home_zprofile
+
+    node [label="~/.zshenv"]
+    zsh_li_home_zshenv
+
+    node [label="/etc/zshenv"]
+    zsh_li_etc_zshenv
+
+    edge [penwidth=5 constraint=true style=solid dir=forward]
+    edge [color="#009e73"]
+    zsh_li -> zsh_li_etc_zshenv -> zsh_li_home_zshenv -> zsh_li_home_zprofile -> zsh_li_home_zshrc -> zsh_li_home_zlogin -> zsh_li_running_to_logout -> zsh_li_home_zlogout
+}

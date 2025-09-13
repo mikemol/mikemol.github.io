@@ -1,0 +1,3 @@
+digraph node_edge_label_many {
+    A -> {B C D} [label="A descriptive label"]
+}

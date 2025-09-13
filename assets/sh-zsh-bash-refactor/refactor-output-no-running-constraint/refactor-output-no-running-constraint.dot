@@ -1,0 +1,233 @@
+digraph {
+    node [label="\N" shape=none]
+    edge [style=dotted constraint=false dir=none]
+    rankdir=LR
+    {
+        rank=same
+        sh_nn [label="Sh\nNon-Login\nNon-Interactive"]
+        sh_ni [label="Sh\nNon-Login\nInteractive"]
+        sh_ln [label="Sh\nLogin\nNon-Interactive"]
+        sh_li [label="Sh\nLogin\nInteractive"]
+        zsh_nn [label="Zsh\nNon-Login\nNon-Interactive"]
+        zsh_ni [label="Zsh\nNon-Login\nInteractive"]
+        zsh_ln [label="Zsh\nLogin\nNon-Interactive"]
+        zsh_li [label="Zsh\nLogin\nInteractive"]
+        bash_nnn [label="Bash\nNon-Remote\nNon-Login\nNon-Interactive"]
+        bash_nni [label="Bash\nNon-Remote\nNon-Login\nInteractive"]
+        bash_nln [label="Bash\nNon-Remote\nLogin\nNon-Interactive"]
+        bash_nli [label="Bash\nNon-Remote\nLogin\nInteractive"]
+        bash_rnn [label="Bash\nRemote\nNon-Login\nNon-Interactive"]
+        bash_rni [label="Bash\nRemote\nNon-Login\nInteractive"]
+        bash_rln [label="Bash\nRemote\nLogin\nNon-Interactive"]
+        bash_rli [label="Bash\nRemote\nLogin\nInteractive"]
+
+        edge [constraint=true style=invis]
+        bash_rnn -> bash_rni -> bash_rln 
+    }
+    {
+        rank=same
+        node [label="/etc/profile"]
+        bash_nln_etc_profile ->
+        bash_nli_etc_profile ->
+        bash_rln_etc_profile ->
+        bash_rli_etc_profile
+    }
+    {
+        rank=same
+        node [label="~/.zlogin"]
+        zsh_ln_home_zlogin ->
+        zsh_li_home_zlogin
+
+        node  [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.bash_login</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+        bash_nln_home_bash_login_case ->
+        bash_nli_home_bash_login_case ->
+        bash_rln_home_bash_login_case ->
+        bash_rli_home_bash_login_case
+    }
+    {
+        rank=same
+        node [label="~/.bash_profile"]
+        bash_nln_home_bash_profile ->
+        bash_nli_home_bash_profile ->
+        bash_rln_home_bash_profile ->
+        bash_rli_home_bash_profile
+    }
+
+    {
+        rank=same
+        node [label="/etc/bash.bashrc"]
+        bash_nni_bashrc ->
+        bash_rnn_bashrc ->
+        bash_rli_bashrc
+    }
+    {
+        rank=same
+        node [label="~/.zshrc"]
+        zsh_ni_home_zshrc
+        zsh_li_home_zshrc
+        node [label="~/.bashrc"]
+        bash_nni_home_bashrc
+        bash_rnn_home_bashrc
+
+        zsh_ni_home_zshrc ->
+        zsh_li_home_zshrc
+        bash_nni_home_bashrc ->
+        bash_rnn_home_bashrc
+    }
+    
+    {
+        rank=same
+        edge [constraint=true]
+        node [label="Running..."]
+        sh_nn_running
+        sh_ni_running
+        sh_ln_running
+        sh_li_running
+        zsh_nn_running
+        zsh_ni_running
+        zsh_ln_running
+        zsh_li_running
+        bash_nnn_running
+        bash_nni_running
+        bash_nln_running
+        bash_nli_running
+        bash_rnn_running
+        bash_rln_running
+        bash_rli_running
+    }
+
+
+    {
+        rank=same
+        node [label="$BASH_ENV"]
+        bash_nnn_bash_env ->
+        bash_nln_bash_env ->
+        bash_rln_bash_env
+        node [label="$ENV"]
+        sh_ni_env ->
+        sh_li_env
+    }
+
+    {
+        rank=same
+        node [label="~/.zlogout"]
+        zsh_ln_home_zlogout ->
+        zsh_li_home_zlogout
+        node [label="~/.bash_logout"]
+        bash_nln_logout ->
+        bash_nli_logout ->
+        bash_rli_logout
+    }
+
+    {
+        rank=same
+        node [label="~/.profile"]
+        sh_ln_home_profile ->
+        sh_li_home_profile
+
+        node [label="~/.zprofile"]
+        zsh_ln_home_zprofile ->
+        zsh_li_home_zprofile
+
+        node [label=< <table border='0' cellborder='1' cellspacing='0'><tr><td rowspan='2' port='in'>~/.profile</td><td port='found'>Found</td></tr><tr><td port='not_found'>Not found</td></tr></table> > shape=none]
+        bash_nln_home_profile_case ->
+        bash_nli_home_profile_case ->
+        bash_rln_home_profile_case ->
+        bash_rli_home_profile_case
+
+        sh_li_home_profile -> bash_nln_home_profile_case
+
+    }
+
+    {
+        rank=same
+        node [label="~/.zshenv"]
+        zsh_nn_home_zshenv ->
+        zsh_ni_home_zshenv ->
+        zsh_ln_home_zshenv ->
+        zsh_li_home_zshenv
+    }
+
+    {
+        rank=same
+        node [label="/etc/zshenv"]
+        zsh_nn_etc_zshenv ->
+        zsh_ni_etc_zshenv ->
+        zsh_ln_etc_zshenv ->
+        zsh_li_etc_zshenv
+    }
+
+    no_path [label="No path"]
+
+    edge [penwidth=5 constraint=true style=solid dir=forward]
+
+    edge [color="black"]
+    sh_nn -> sh_nn_running
+
+    edge [color="orange"]
+    sh_ni -> sh_ni_env -> sh_ni_running
+    
+    edge [color="#35b4e9"]
+    sh_ln -> sh_ln_home_profile -> sh_ln_running
+
+    edge [color="#009e73"]
+    sh_li -> sh_li_home_profile -> sh_li_env -> sh_li_running
+
+    edge [color="black"]
+    zsh_nn -> zsh_nn_etc_zshenv -> zsh_nn_home_zshenv -> zsh_nn_running
+
+    edge [color="orange"]
+    zsh_ni -> zsh_ni_etc_zshenv -> zsh_ni_home_zshenv -> zsh_ni_home_zshrc -> zsh_ni_running
+
+    edge [color="#35b4e9"]
+    zsh_ln -> zsh_ln_etc_zshenv -> zsh_ln_home_zshenv -> zsh_ln_home_zprofile -> zsh_ln_home_zlogin -> zsh_ln_running -> zsh_ln_home_zlogout
+
+    edge [color="#009e73"]
+    zsh_li -> zsh_li_etc_zshenv -> zsh_li_home_zshenv -> zsh_li_home_zprofile -> zsh_li_home_zshrc -> zsh_li_home_zlogin -> zsh_li_running -> zsh_li_home_zlogout
+
+    edge [color="black"]
+    bash_nnn -> bash_nnn_bash_env -> bash_nnn_running
+
+    edge [color="orange"]
+    bash_nni -> bash_nni_bashrc
+    bash_nni_bashrc -> bash_nni_home_bashrc -> bash_nni_running
+
+    edge [color="#35b4e9"]
+    bash_nln -> bash_nln_etc_profile -> bash_nln_home_profile_case:in
+    bash_nln_bash_env -> bash_nln_running
+    bash_nln_home_bash_login_case:found -> bash_nln_bash_env
+    bash_nln_home_bash_login_case:not_found -> bash_nln_home_bash_profile -> bash_nln_bash_env
+    bash_nln_home_profile_case:found -> bash_nln_bash_env
+    bash_nln_home_profile_case:not_found -> bash_nln_home_bash_login_case:in
+    bash_nln_running -> bash_nln_logout
+
+    edge [color="#009e73"]
+    bash_nli -> bash_nli_etc_profile -> bash_nli_home_profile_case:in
+    bash_nli_home_bash_login_case:found -> bash_nli_running
+    bash_nli_home_bash_login_case:not_found -> bash_nli_home_bash_profile -> bash_nli_running 
+    bash_nli_home_profile_case:found -> bash_nli_running
+    bash_nli_home_profile_case:not_found -> bash_nli_home_bash_login_case:in
+    bash_nli_running -> bash_nli_logout
+
+    edge [color="black"]
+    bash_rnn -> bash_rnn_bashrc -> bash_rnn_home_bashrc -> bash_rnn_running
+
+    edge [color="orange"]
+    bash_rni -> no_path
+
+    edge [color="#35b4e9"]
+    bash_rln -> bash_rln_etc_profile -> bash_rln_home_profile_case:in
+    bash_rln_home_profile_case:found -> bash_rln_bash_env
+    bash_rln_home_profile_case:not_found -> bash_rln_home_bash_login_case:in
+    bash_rln_home_bash_login_case:found -> bash_rln_bash_env
+    bash_rln_home_bash_login_case:not_found -> bash_rln_home_bash_profile -> bash_rln_bash_env
+    bash_rln_bash_env -> bash_rln_running
+
+    edge [color="#009e73"]
+    bash_rli -> bash_rli_etc_profile -> bash_rli_bashrc -> bash_rli_home_profile_case:in
+    bash_rli_home_bash_login_case:found -> bash_rli_running
+    bash_rli_home_bash_login_case:not_found -> bash_rli_home_bash_profile -> bash_rli_running
+    bash_rli_home_profile_case:found -> bash_rli_running 
+    bash_rli_home_profile_case:not_found -> bash_rli_home_bash_login_case:in
+    bash_rli_running -> bash_rli_logout
+}

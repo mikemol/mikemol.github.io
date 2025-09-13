@@ -1,0 +1,80 @@
+digraph {
+    node [label="\N" style=filled]
+    edge [style=solid penwidth=4 constraint=false dir=none]
+    rankdir=LR
+    newrank=true
+    {
+        rank=same
+        node [color="#F0E444" fontcolor=black shape=box]
+        edge [constraint=false color="#f0E444"]
+        sh_nn [label="Sh\nNon-Login\nNon-Interactive"]
+        sh_ni [label="Sh\nNon-Login\nInteractive"]
+        sh_ln [label="Sh\nLogin\nNon-Interactive"]
+        sh_li [label="Sh\nLogin\nInteractive"]
+
+        sh_nn -> sh_ni -> sh_ln -> sh_li
+    }
+    {
+        rank=same
+        edge [constraint=false color="#0072B2"]
+        node [label="Running..." color="#0072B2" shape=triangle]
+        sh_nn_running ->
+        sh_ni_running ->
+        sh_ln_running ->
+        sh_li_running
+    }
+    {
+        rank=same
+        node [label="$ENV" color="#D55E00" shape=diamond]
+        edge [color="#d55e00"]
+        sh_ni_env ->
+        sh_li_env
+    }
+    {
+        rank=same
+        node [label="~/.profile" color="#cc79a7" shape=parallelogram]
+        edge [color="#cc79a7"]
+        sh_ln_home_profile ->
+        sh_li_home_profile
+    }
+    {
+        rank=same
+        node [color=black fontcolor=white shape=circle]
+        edge [color=black]
+        B2 ->
+        B3 ->
+        B4
+    }
+
+    edge [penwidth=4 constraint=true style=dashed dir=forward]
+
+    node [shape=none color=white]
+    A4 -> B4 -> C4 -> D4
+    B3 -> C3
+    A2 -> B2
+
+    A1 [label="A"]
+    A2 [label="A"]
+    A4 [label="A"]
+
+    B2 [label="B"]
+    B3 [label="B"]
+    B4 [label="B"]
+
+    C3 [label="C"]
+    C4 [label="C"]
+
+    D4 [label="D"]
+
+    edge [color="black"]
+    sh_nn -> sh_nn_running
+
+    edge [color="orange"]
+    sh_ni -> sh_ni_env -> sh_ni_running
+    
+    edge [color="#35b4e9"]
+    sh_ln -> sh_ln_home_profile -> sh_ln_running
+
+    edge [color="#009e73"]
+    sh_li -> sh_li_home_profile -> sh_li_env -> sh_li_running
+}

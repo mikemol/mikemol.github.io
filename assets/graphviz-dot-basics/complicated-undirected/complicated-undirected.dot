@@ -1,0 +1,33 @@
+graph {
+    A [style="filled" fillcolor="#F0E442" color="#E69F00" penwidth=8]
+    B [style="filled" fillcolor="#F0E442" color="#009E73" penwidth=8]
+    C [style="filled" fillcolor="#F0E442" color="#CC79A7" penwidth=8]
+    D [style="filled" fillcolor="#56B4E9" color="#E69F00" penwidth=8]
+    E [style="filled" fillcolor="#56B4E9" color="#009E73" penwidth=8]
+    F [style="filled" fillcolor="#56B4E9" color="#CC79A7" penwidth=8]
+    G [style="filled" fillcolor="#D55E00" color="#E69F00" penwidth=8]
+    H [style="filled" fillcolor="#D55E00" color="#009E73" penwidth=8]
+    I [style="filled" fillcolor="#D55E00" color="#CC79A7" penwidth=8]
+
+    subgraph clusterA {
+        A -- B
+        B -- C
+        C -- A
+    }
+
+    subgraph clusterB {
+        D -- E
+        E -- F
+        F -- D
+    }
+
+    subgraph clusterC {
+        G -- H
+        H -- I
+        I -- G
+    }
+
+    A -- D
+    B -- G
+    H -- E
+}
