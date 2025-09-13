@@ -16,7 +16,7 @@ So, in the interest of trying to be lazy (really!), I wrote a script to automate
 
 ## Workflow
 
-![An illustration of the script flow.]({{ site.url }}/assets/blog-asset-generation/script-flow/script-flow.svg)
+![An illustration of the script flow.](../../../../../assets/blog-asset-generation/script-flow/script-flow.svg)
 
 Here's how it works:
 

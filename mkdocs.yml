@@ -54,23 +54,26 @@ plugins:
   - search
   - blog:
       blog_dir: blog
+      post_readtime: true # Enables the "X min read" text
+      post_url_format: "{date}/{slug}" # A cleaner URL format
   - redirects:
       redirect_maps:
-        '2018/01/05/blank-renders.html': 'blog/2018-01-05-blank-renders.md'
-        '2018/01/05/here-i-go-again-with-a-blog.html': 'blog/2018-01-05-here-i-go-again-with-a-blog.md'
-        '2018/01/06/ifttt-integration-test-f1edfb94-570f-48c3-98a7-8baf826205c4.html': 'blog/2018-01-06-ifttt-integration-test-f1edfb94-570f-48c3-98a7-8baf826205c4.md'
-        '2018/01/07/graphviz-jekyll-js.html': 'blog/2018-01-07-graphviz-jekyll-js.md'
-        '2018/01/09/blog-workflow.html': 'blog/2018-01-09-blog-workflow.md'
-        '2018/01/12/graphviz-technique-nodes-as-edge-labels.html': 'blog/2018-01-12-graphviz-technique-nodes-as-edge-labels.md'
-        '2018/02/04/graphviz-sh-zsh-bash-refactor.html': 'blog/2018-02-04-graphviz-sh-zsh-bash-refactor.md'
-        '2018/02/10/hardware-touchpad-troubles.html': 'blog/2018-02-10-hardware-touchpad-troubles.md'
-        '2018/02/11/color-safe-palette.html': 'blog/2018-02-11-color-safe-palette.md'
-        '2018/02/13/asset-regeneration-script.html': 'blog/2018-02-13-asset-regeneration-script.md'
-        '2018/02/18/link-rollup.html': 'blog/2018-02-18-link-rollup.md'
-        '2018/02/26/graphviz-dot-basics-pt-1.html': 'blog/2018-02-26-graphviz-dot-basics-pt-1.md'
-        '2018/02/27/graphviz-dot-basics-pt-2.html': 'blog/2018-02-27-graphviz-dot-basics-pt-2.md'
-        '2018/03/24/vdi-and-containers.html': 'blog/2018-03-24-vdi-and-containers.md'
-        '2020/06/14/on-github-actions-security-controls.html': 'blog/2020-06-14-on-github-actions-security-controls.md'
-        '2022/08/31/mike-reads.html': 'blog/2022-08-31-mike-reads.md'
-        '2022/08/31/mike-writes.html': 'blog/2022-08-31-mike-writes.md'
-        '2022/09/01/phoenix-guards-pt-1.html': 'blog/2022-09-01-phoenix-guards-pt-1.md'
+      redirect_maps:
+        '2018/01/05/blank-renders.html': 'blog/2018/01/05/blank-renders/index.md'
+        '2018/01/05/here-i-go-again-with-a-blog.html': 'blog/2018/01/05/here-i-go-again-with-a-blog/index.md'
+        '2018/01/06/ifttt-integration-test-f1edfb94-570f-48c3-98a7-8baf826205c4.html': 'blog/2018/01/06/ifttt-integration-test-f1edfb94-570f-48c3-98a7-8baf826205c4/index.md'
+        '2018/01/07/graphviz-jekyll-js.html': 'blog/2018/01/07/graphviz-jekyll-js/index.md'
+        '2018/01/09/blog-workflow.html': 'blog/2018/01/09/blog-workflow/index.md'
+        '2018/01/12/graphviz-technique-nodes-as-edge-labels.html': 'blog/2018/01/12/graphviz-technique-nodes-as-edge-labels/index.md'
+        '2018/02/04/graphviz-sh-zsh-bash-refactor.html': 'blog/2018/02/04/graphviz-sh-zsh-bash-refactor/index.md'
+        '2018/02/10/hardware-touchpad-troubles.html': 'blog/2018/02/10/hardware-touchpad-troubles/index.md'
+        '2018/02/11/color-safe-palette.html': 'blog/2018/02/11/color-safe-palette/index.md'
+        '2018/02/13/asset-regeneration-script.html': 'blog/2018/02/13/asset-regeneration-script/index.md'
+        '2018/02/18/link-rollup.html': 'blog/2018/02/18/link-rollup/index.md'
+        '2018/02/26/graphviz-dot-basics-pt-1.html': 'blog/2018/02/26/graphviz-dot-basics-pt-1/index.md'
+        '2018/02/27/graphviz-dot-basics-pt-2.html': 'blog/2018/02/27/graphviz-dot-basics-pt-2/index.md'
+        '2018/03/24/vdi-and-containers.html': 'blog/2018/03/24/vdi-and-containers/index.md'
+        '2020/06/14/on-github-actions-security-controls.html': 'blog/2020/06/14/on-github-actions-security-controls/index.md'
+        '2022/08/31/mike-reads.html': 'blog/2022/08/31/mike-reads/index.md'
+        '2022/08/31/mike-writes.html': 'blog/2022/08/31/mike-writes/index.md'
+        '2022/09/01/phoenix-guards-pt-1.html': 'blog/2022/09/01/phoenix-guards-pt-1/index.md'

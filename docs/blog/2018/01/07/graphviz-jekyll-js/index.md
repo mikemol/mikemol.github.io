@@ -32,7 +32,7 @@ Instead, I think what I'd like is a generator module that embeds [vis-js](http:/
 
 I think that workflow would work a lot better for me. So instead of the Dot code, you see above, you'd see a clean, SVG-defined inline-image. And if that didn't get rendered, you'd at least see a static pre-rendered PNG that looks something like this:
 
-![Static pre-rendered PNG. Shown is "Write DOT separately" leading separately to "svg" and "png". "svg" leads to "discard", with the note "GH Pages doesn't like SVG". "png" leads to "Rebuild asset at higher DPI and scale down." This, in turn, leads to "embed", which leads separately to "done" and "Tweak asset for use case". "Tweak asset for use case" leads back to "Rebuild asset at higher DPI and scale down."]({{ site.url }}/assets/graphviz-jekyll-js/graphviz-workflow/graphviz-workflow.png)
+![Static pre-rendered PNG. Shown is "Write DOT separately" leading separately to "svg" and "png". "svg" leads to "discard", with the note "GH Pages doesn't like SVG". "png" leads to "Rebuild asset at higher DPI and scale down." This, in turn, leads to "embed", which leads separately to "done" and "Tweak asset for use case". "Tweak asset for use case" leads back to "Rebuild asset at higher DPI and scale down."](../../../../../assets/graphviz-jekyll-js/graphviz-workflow/graphviz-workflow.png)
 
 So, you might not see quite what's wrong with that. Admittedly, it does look better than if I were to render that content on my work laptop. Here, the font-kerning is horrible, but at least the font hinting works better. I've got a separate post (or a few) on that topic.
 
@@ -40,6 +40,6 @@ Though, text rendering _belongs on the client_. The client knows about the displ
 
 So, real quick, let's find out if client-side rendering is the proper solution to this.
 
-![Embedded SVG. Shown is "Write DOT separately" leading separately to "svg" and "png". "svg" leads to "discard", with the note "GH Pages doesn't like SVG". "png" leads to "Rebuild asset at higher DPI and scale down." This, in turn, leads to "embed", which leads separately to "done" and "Tweak asset for use case". "Tweak asset for use case" leads back to "Rebuild asset at higher DPI and scale down."]({{ site.url }}/assets/graphviz-jekyll-js/graphviz-workflow/graphviz-workflow.svg)
+![Embedded SVG. Shown is "Write DOT separately" leading separately to "svg" and "png". "svg" leads to "discard", with the note "GH Pages doesn't like SVG". "png" leads to "Rebuild asset at higher DPI and scale down." This, in turn, leads to "embed", which leads separately to "done" and "Tweak asset for use case". "Tweak asset for use case" leads back to "Rebuild asset at higher DPI and scale down."](../../../../../assets/graphviz-jekyll-js/graphviz-workflow/graphviz-workflow.svg)
 
 Now, that renders fine using Jekyll and local preview on my laptop. But will it be when I upload this doc to GitHub? I've heard it doesn't, but we'll have to see!

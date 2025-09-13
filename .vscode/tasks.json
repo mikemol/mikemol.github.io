@@ -1,36 +1,10 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "regen assets",
+            "label": "Serve MkDocs Site",
             "type": "shell",
-            "command": "_scripts/regen_assets.sh",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "dedicated"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "launch jekyll (no drafts)",
-            "type": "shell",
-            "command": "bundle exec jekyll s",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "dedicated"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "launch jekyll (show drafts)",
-            "type": "shell",
-            "command": "bundle exec jekyll s --drafts",
+            "command": ". .venv/bin/activate && mkdocs serve",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
