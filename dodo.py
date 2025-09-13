@@ -62,7 +62,7 @@ def task_index():
                     "year": year,
                     "date": f"{year}-{month}-{day}",
                     "title": title,
-                    "path": str(relative_path).replace("index.md", ""),
+                    "path": str(relative_path),
                 })
 
         # Sort posts by date in descending order

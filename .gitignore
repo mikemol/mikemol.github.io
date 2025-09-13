@@ -9,5 +9,7 @@ __pycache__/
 *.swp
 *~
 *$py.class
+# Dynamically generated.
+docs/blog/index.md
 site/   
 Thumbs.db
